@@ -61,3 +61,26 @@ window.addEventListener("scroll", () => {
       `translateY(${p * -120}px) scale(${1 - p * 0.4})`;
   }
 });
+/* ===============================
+   CITY SCROLL CONTROLLER
+=============================== */
+
+const citySection = document.querySelector(".city-scroll");
+const cityFrames = document.querySelectorAll(".city-frame");
+
+if (citySection && cityFrames.length) {
+  window.addEventListener("scroll", () => {
+    const rect = citySection.getBoundingClientRect();
+    const totalScroll = citySection.offsetHeight - window.innerHeight;
+    const progress = Math.min(
+      Math.max(-rect.top / totalScroll, 0),
+      0.999
+    );
+
+    const index = Math.floor(progress * cityFrames.length);
+
+    cityFrames.forEach((f, i) => {
+      f.classList.toggle("active", i === index);
+    });
+  });
+}
