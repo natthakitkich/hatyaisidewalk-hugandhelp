@@ -24,18 +24,18 @@ fetch(sheetURL)
 /* COUNT UP */
 function animate(id, value, prefix = "") {
   const el = document.getElementById(id);
-  let start = 0;
-  const duration = 1500;
-  const t0 = performance.now();
+  const duration = 1600;
+  const start = performance.now();
 
-  function tick(t) {
-    const p = Math.min((t - t0) / duration, 1);
+  function tick(now) {
+    const p = Math.min((now - start) / duration, 1);
     el.textContent = prefix + Math.floor(p * value).toLocaleString("th-TH");
     if (p < 1) requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
 }
 
+/* IMPACT OBSERVER */
 const impact = document.getElementById("impactSection");
 let done = false;
 
@@ -47,27 +47,37 @@ new IntersectionObserver(entries => {
   }
 }, { threshold: 0.4 }).observe(impact);
 
-/* PARALLAX LOGO */
+/* REVEAL MOTION */
+const reveals = document.querySelectorAll(".reveal");
+const io = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+}, { threshold: 0.25 });
+
+reveals.forEach(el => io.observe(el));
+
+/* PARALLAX LOGO + DECOR */
 const logo = document.getElementById("parallaxLogo");
+const palm = document.querySelector(".decor.palm");
+const flower = document.querySelector(".decor.flower");
 const heroH = window.innerHeight;
 
 window.addEventListener("scroll", () => {
-  const p = Math.min(scrollY / heroH, 1);
-  logo.style.transform = `translateY(${p * -120}px) scale(${1 - p * 0.4})`;
-});
-const palm = document.querySelector(".decor.palm");
-const flower = document.querySelector(".decor.flower");
+  const y = window.scrollY;
+  const p = Math.min(y / heroH, 1);
 
-window.addEventListener("scroll", () => {
-  const scrollY = window.scrollY;
+  if (logo) {
+    logo.style.transform = `translateY(${p * -120}px) scale(${1 - p * 0.4})`;
+  }
 
   if (palm) {
-    palm.style.transform =
-      `translateY(${scrollY * 0.2}px) rotate(${scrollY * 0.02}deg)`;
+    palm.style.transform = `translateY(${y * 0.2}px) rotate(${y * 0.02}deg)`;
   }
 
   if (flower) {
-    flower.style.transform =
-      `translateY(${scrollY * 0.15}px)`;
+    flower.style.transform = `translateY(${y * 0.15}px)`;
   }
 });
