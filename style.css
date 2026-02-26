@@ -10,44 +10,44 @@
 body {
   margin: 0;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #ffffff;
+  background: #fff;
   color: var(--text-main);
-  -webkit-font-smoothing: antialiased;
 }
 
+/* HERO */
 .hero {
   min-height: 100vh;
-  padding: 120px 24px;
+  padding: 140px 24px 120px;
   text-align: center;
 }
 
 .logo {
-  width: 96px;
-  margin-bottom: 48px;
+  width: 180px; /* ใหญ่ขึ้น 2 เท่า */
+  margin-bottom: 64px;
 }
 
-.title {
-  font-size: clamp(42px, 6vw, 72px);
+.hero-title {
+  font-size: clamp(44px, 6vw, 80px);
   font-weight: 600;
   letter-spacing: -0.03em;
   margin-bottom: 24px;
 }
 
-.title span {
+.hero-title span {
   display: block;
   font-weight: 300;
   color: var(--text-sub);
-  margin-top: 8px;
 }
 
-.subtitle {
+.hero-subtitle {
   font-size: 20px;
   line-height: 1.6;
   color: var(--text-sub);
   margin-bottom: 120px;
 }
 
-.impact {
+/* STATS */
+.stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 80px;
@@ -55,14 +55,48 @@ body {
   margin: 0 auto;
 }
 
-.impact-number {
+.stat-number {
   font-size: clamp(64px, 8vw, 96px);
   font-weight: 600;
   letter-spacing: -0.02em;
 }
 
-.impact-label {
+.stat-label {
   margin-top: 12px;
   font-size: 16px;
+  color: var(--text-sub);
+}
+
+/* CONTENT */
+.content {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 160px 24px;
+}
+
+.content-block {
+  margin-bottom: 120px;
+}
+
+.content h2 {
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+}
+
+.content p,
+.content li {
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.content ul {
+  padding-left: 20px;
+}
+
+.quote {
+  margin-top: 40px;
+  font-style: italic;
   color: var(--text-sub);
 }
