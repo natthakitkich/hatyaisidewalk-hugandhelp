@@ -2,11 +2,17 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* 🔒 lock horizontal */
+}
+
+body {
   font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
   color: #111;
-  background: transparent; /* ใช้สีจาก JS เท่านั้น */
+  background: var(--bg-color);
 }
 
 /* =====================
@@ -23,9 +29,9 @@ body {
   text-align: center;
 }
 
-/* overlay เบา ๆ แทน background */
+/* ❌ soft-bg ไม่ใช้สีอีกแล้ว */
 .soft-bg {
-  backdrop-filter: saturate(1.05);
+  background: transparent;
 }
 
 /* =====================
@@ -108,7 +114,7 @@ body {
 }
 
 /* =====================
-   CONTACT / FOOTER
+   CONTACT & FOOTER
 ===================== */
 
 .contact a {
@@ -125,45 +131,20 @@ footer {
 }
 
 /* =====================
-   REVEAL MOTION (Apple-style)
+   REVEAL MOTION (SAFE)
 ===================== */
 
-.section.reveal {
+.section {
   opacity: 0;
-  transform: translateY(80px);
-}
-
-.section.reveal.show {
-  opacity: 1;
-  transform: translateY(0);
+  transform: translateY(64px);
   transition:
     opacity 1s cubic-bezier(.4,0,.2,1),
     transform 1s cubic-bezier(.4,0,.2,1);
 }
 
-.story h2 {
-  opacity: 0;
-  transform: translateY(32px);
-}
-
-.section.show .story h2 {
+.section.show {
   opacity: 1;
   transform: translateY(0);
-  transition: 0.8s ease;
-}
-
-.story p,
-.story li {
-  opacity: 0;
-  transform: translateY(24px);
-}
-
-.section.show .story p,
-.section.show .story li {
-  opacity: 1;
-  transform: translateY(0);
-  transition: 0.9s ease;
-  transition-delay: 0.15s;
 }
 
 /* =====================
