@@ -1,5 +1,5 @@
 /* ===============================
-   RANDOM BACKGROUND ON LOAD
+   RANDOM BACKGROUND (ONE COLOR)
 =============================== */
 const bgColors = [
   "#f2eeef",
@@ -10,9 +10,8 @@ const bgColors = [
   "#fde152"
 ];
 
-const randomBg = bgColors[Math.floor(Math.random() * bgColors.length)];
-document.body.style.backgroundColor = randomBg;
-document.body.classList.add("bg-intro");
+const chosen = bgColors[Math.floor(Math.random() * bgColors.length)];
+document.documentElement.style.setProperty("--bg-color", chosen);
 
 /* ===============================
    GOOGLE SHEETS
@@ -49,23 +48,23 @@ function animate(id, value, prefix = "") {
   const start = performance.now();
 
   function tick(now) {
-    const progress = Math.min((now - start) / duration, 1);
+    const p = Math.min((now - start) / duration, 1);
     el.textContent =
-      prefix + Math.floor(progress * value).toLocaleString("th-TH");
-    if (progress < 1) requestAnimationFrame(tick);
+      prefix + Math.floor(p * value).toLocaleString("th-TH");
+    if (p < 1) requestAnimationFrame(tick);
   }
 
   requestAnimationFrame(tick);
 }
 
 /* ===============================
-   IMPACT OBSERVER
+   IMPACT TRIGGER (SAFE)
 =============================== */
-const impactSection = document.getElementById("impactSection");
+const impact = document.getElementById("impactSection");
 let impactDone = false;
 
-const impactObserver = new IntersectionObserver(
-  entries => {
+if (impact) {
+  new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting && ready && !impactDone) {
         animate("totalAmount", totalAmount, "฿");
@@ -73,20 +72,15 @@ const impactObserver = new IntersectionObserver(
         impactDone = true;
       }
     });
-  },
-  { threshold: 0.4 }
-);
-
-if (impactSection) {
-  impactObserver.observe(impactSection);
+  }, { threshold: 0.2 }).observe(impact);
 }
 
 /* ===============================
-   REVEAL MOTION
+   SECTION REVEAL (NO DEAD STATE)
 =============================== */
-const sections = document.querySelectorAll(".section.reveal");
+const sections = document.querySelectorAll(".section");
 
-const revealObserver = new IntersectionObserver(
+const reveal = new IntersectionObserver(
   entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -94,38 +88,42 @@ const revealObserver = new IntersectionObserver(
       }
     });
   },
-  {
-    threshold: 0.25,
-    rootMargin: "0px 0px -120px 0px"
-  }
+  { threshold: 0.15 }
 );
 
-sections.forEach(section => revealObserver.observe(section));
+sections.forEach(sec => {
+  reveal.observe(sec);
+
+  /* reveal immediately if already in viewport */
+  if (sec.getBoundingClientRect().top < window.innerHeight * 0.85) {
+    sec.classList.add("show");
+  }
+});
 
 /* ===============================
-   PARALLAX LOGO + DECOR
+   PARALLAX
 =============================== */
 const logo = document.getElementById("parallaxLogo");
 const palm = document.querySelector(".decor.palm");
 const flower = document.querySelector(".decor.flower");
-const heroHeight = window.innerHeight;
+const heroH = window.innerHeight;
 
 window.addEventListener("scroll", () => {
-  const scrollY = window.scrollY;
-  const progress = Math.min(scrollY / heroHeight, 1);
+  const y = window.scrollY;
+  const p = Math.min(y / heroH, 1);
 
   if (logo) {
     logo.style.transform =
-      `translateY(${progress * -120}px) scale(${1 - progress * 0.4})`;
+      `translateY(${p * -120}px) scale(${1 - p * 0.35})`;
   }
 
   if (palm) {
     palm.style.transform =
-      `translateY(${scrollY * 0.2}px) rotate(${scrollY * 0.02}deg)`;
+      `translateY(${y * 0.18}px) rotate(${y * 0.02}deg)`;
   }
 
   if (flower) {
     flower.style.transform =
-      `translateY(${scrollY * 0.15}px)`;
+      `translateY(${y * 0.14}px)`;
   }
 });
