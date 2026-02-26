@@ -5,8 +5,9 @@
 body {
   margin: 0;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #fff;
+  background: #ffffff;
   color: #111;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* HERO */
@@ -17,13 +18,14 @@ body {
 }
 
 .hero-logo {
-  height: 50vh; /* 50% ของจอ */
+  height: 50vh;
   max-height: 420px;
   margin-bottom: 48px;
+  will-change: transform;
 }
 
 .hero-title {
-  font-size: clamp(40px, 6vw, 72px);
+  font-size: clamp(42px, 6vw, 72px);
   font-weight: 600;
   letter-spacing: -0.03em;
 }
@@ -37,71 +39,44 @@ body {
 .hero-sub {
   margin-top: 24px;
   font-size: 20px;
+  line-height: 1.6;
   color: #6e6e73;
 }
 
 /* IMPACT */
 .impact {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
-  gap: 80px;
   justify-content: center;
   align-items: center;
+}
+
+.impact-inner {
+  display: flex;
+  gap: 120px;
   text-align: center;
 }
 
 .impact-number {
-  font-size: clamp(72px, 10vw, 120px);
+  font-size: clamp(80px, 10vw, 128px);
   font-weight: 600;
+  letter-spacing: -0.04em;
 }
 
 .impact-label {
   margin-top: 16px;
+  font-size: 16px;
   color: #6e6e73;
 }
 
-/* STORY */
-.story {
-  min-height: 100vh;
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 160px 24px;
-}
+/* MOBILE */
+@media (max-width: 768px) {
+  .impact-inner {
+    flex-direction: column;
+    gap: 64px;
+  }
 
-.story h2 {
-  font-size: 36px;
-  margin-bottom: 32px;
-}
-
-.story p,
-.story li {
-  font-size: 18px;
-  line-height: 1.8;
-}
-
-.story ul {
-  padding-left: 20px;
-}
-
-.quote {
-  font-style: italic;
-  color: #6e6e73;
-}
-
-/* FADE EFFECT */
-.fade {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 1.2s ease;
-}
-
-.fade.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* PARALLAX LOGO */
-.hero-logo {
-  will-change: transform;
-  transition: transform 0.1s linear;
+  .hero-logo {
+    height: 40vh;
+  }
 }
