@@ -27,9 +27,21 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+
+  /* reveal motion (safe) */
+  opacity: 0;
+  transform: translateY(64px);
+  transition:
+    opacity 1s cubic-bezier(.4,0,.2,1),
+    transform 1s cubic-bezier(.4,0,.2,1);
 }
 
-/* ❌ soft-bg ไม่ใช้สีอีกแล้ว */
+.section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ไม่ใช้พื้นหลังแยกสี */
 .soft-bg {
   background: transparent;
 }
@@ -131,42 +143,28 @@ footer {
 }
 
 /* =====================
-   REVEAL MOTION (SAFE)
-===================== */
-
-.section {
-  opacity: 0;
-  transform: translateY(64px);
-  transition:
-    opacity 1s cubic-bezier(.4,0,.2,1),
-    transform 1s cubic-bezier(.4,0,.2,1);
-}
-
-.section.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* =====================
-   DECOR
+   DECOR (ปรับใหม่ให้เห็นชัดขึ้น)
 ===================== */
 
 .decor {
   position: absolute;
   pointer-events: none;
+  z-index: 0;
 }
 
+/* 🌴 ต้นมะพร้าว */
 .decor.palm {
-  width: min(40vw, 360px);
-  bottom: -60px;
-  left: -80px;
+  width: min(60vw, 520px);   /* ใหญ่ขึ้น */
+  bottom: -10px;             /* เห็นในจอมากขึ้น */
+  left: -20px;               /* ไม่หลุดจอ */
   animation: sway 4s ease-in-out infinite;
 }
 
+/* 🌿 พุ่มไม้ */
 .decor.flower {
-  width: min(32vw, 280px);
-  bottom: -40px;
-  right: -60px;
+  width: min(50vw, 420px);   /* ใหญ่ขึ้น */
+  bottom: -5px;
+  right: -20px;
   animation: bounce 3.5s ease-in-out infinite;
 }
 
@@ -182,9 +180,24 @@ footer {
   100% { transform: translateY(0); }
 }
 
-/* MOBILE */
+/* =====================
+   MOBILE TUNING
+===================== */
+
 @media (max-width: 768px) {
   .impact-number {
     font-size: 96px;
+  }
+
+  .decor.palm {
+    width: 70vw;
+    left: -10px;
+    bottom: 0;
+  }
+
+  .decor.flower {
+    width: 60vw;
+    right: -10px;
+    bottom: 0;
   }
 }
