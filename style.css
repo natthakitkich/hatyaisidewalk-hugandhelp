@@ -1,11 +1,9 @@
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html, body {
   margin: 0;
   width: 100%;
-  overflow-x: hidden; /* 🔒 lock horizontal ทุกแพลตฟอร์ม */
+  overflow-x: hidden;
 }
 
 body {
@@ -14,212 +12,82 @@ body {
   color: #111;
 }
 
-/* =====================
-   SECTION SYSTEM
-===================== */
-
+/* ================= SECTION ================= */
 .section {
-  min-height: 100vh;
+  min-height: calc(var(--vh) * 100);
   padding: 140px 24px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-
-  opacity: 0;
-  transform: translateY(64px);
-  transition:
-    opacity 1s cubic-bezier(.4,0,.2,1),
-    transform 1s cubic-bezier(.4,0,.2,1);
 }
 
-.section.show {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* ================= HERO ================= */
+.hero-logo { max-height: 52vh; margin-bottom: 32px; }
+.hero-title { font-size: clamp(42px,6vw,72px); font-weight: 600; }
+.hero-title span { color: rgba(0,0,0,.45); }
+.hero-sub { font-size: 20px; color: rgba(0,0,0,.55); }
 
-/* =====================
-   HERO
-===================== */
-
-.hero-logo {
-  max-height: 52vh;
-  margin-bottom: 32px;
-}
-
-.hero-title {
-  font-size: clamp(42px, 6vw, 72px);
-  font-weight: 600;
-}
-
-.hero-title span {
-  display: block;
-  color: rgba(0,0,0,.45);
-}
-
-.hero-sub {
-  font-size: 20px;
-  color: rgba(0,0,0,.55);
-}
-
-/* =====================
-   IMPACT
-===================== */
-
+/* ================= IMPACT ================= */
 .impact-number {
-  font-size: clamp(96px, 14vw, 180px);
+  font-size: clamp(96px,14vw,180px);
   font-weight: 700;
-  line-height: 1;
 }
-
 .gradient-money {
   background: linear-gradient(90deg,#00c6ff,#ff5fa2,#ff9f0a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 .gradient-partner {
   background: linear-gradient(90deg,#34c759,#007aff,#ffd60a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.impact-label { margin-top: 16px; }
 
-.impact-label {
-  margin-top: 16px;
-  color: rgba(0,0,0,.55);
-}
+/* ================= STORY ================= */
+.story-inner { max-width: 720px; }
+.story h2 { font-size: 36px; margin-bottom: 32px; }
+.story p, .story li { font-size: 20px; line-height: 1.9; }
 
-/* =====================
-   STORY
-===================== */
-
-.story-inner {
-  max-width: 720px;
-}
-
-.story h2 {
-  font-size: 36px;
-  margin-bottom: 32px;
-}
-
-.story p,
-.story li {
-  font-size: 20px;
-  line-height: 1.9;
-}
-
-/* =====================================================
-   🍎 CITY GALLERY — APPLE STYLE (FIXED)
-===================================================== */
-
-.gallery {
-  position: relative;
-  width: 100vw;
-  height: 400vh;          /* 4 ภาพ = 4 viewport */
-  overflow: hidden;
-}
-
-.gallery-item {
-  position: sticky;
-  top: 0;
-
-  width: 100vw;
-  height: 100vh;
-
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-/* 🔥 ตัวสำคัญ: ดันภาพทีละ viewport */
-.gallery-item:not(:first-child) {
-  margin-top: 100vh;
-}
-
-/* =====================
-   DECOR
-===================== */
-
-.decor {
-  position: absolute;
-  pointer-events: none;
-}
-
-.decor.palm {
-  width: min(60vw, 520px);
-  left: -20px;
-  bottom: -20px;
-  animation: sway 4s ease-in-out infinite;
-}
-
-.decor.flower {
-  width: min(50vw, 420px);
-  right: -20px;
-  bottom: -10px;
-  animation: bounce 3.5s ease-in-out infinite;
-}
-
-@keyframes sway {
-  0% { transform: rotate(-3deg); }
-  50% { transform: rotate(3deg); }
-  100% { transform: rotate(-3deg); }
-}
-
-@keyframes bounce {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
-  100% { transform: translateY(0); }
-}
-
-/* =====================
-   FOOTER
-===================== */
-
-footer {
-  padding: 64px 24px;
-  text-align: center;
-  font-size: 14px;
-  color: rgba(0,0,0,.45);
-}
-/* =====================================================
-   🍎 APPLE-STYLE CITY SCROLL (SAFE FOR ALL DEVICES)
-===================================================== */
-
+/* ================= 🍎 CITY SCROLL ================= */
 .city-scroll {
-  position: relative;
-  height: 400vh; /* 4 ภาพ = 4 viewport */
+  height: calc(var(--vh) * 400);
 }
 
-.city-sticky {
+.city-stage {
   position: sticky;
   top: 0;
-
   width: 100vw;
-  height: 100vh;
-
-  overflow: hidden; /* 🔒 ล็อกขอบ */
+  height: calc(var(--vh) * 100);
+  overflow: hidden;
 }
 
 .city-frame {
   position: absolute;
   inset: 0;
-
-  width: 100%;
-  height: 100%;
-
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-
   opacity: 0;
   transform: scale(1.05);
-  transition:
-    opacity 0.8s cubic-bezier(.4,0,.2,1),
-    transform 1.2s cubic-bezier(.4,0,.2,1);
+  transition: opacity .8s ease, transform 1.2s ease;
 }
 
 .city-frame.active {
   opacity: 1;
   transform: scale(1);
+}
+
+/* ================= DECOR ================= */
+.decor { position: absolute; pointer-events: none; }
+.decor.palm { width: min(60vw,520px); left: -20px; bottom: -20px; }
+.decor.flower { width: min(50vw,420px); right: -20px; bottom: -10px; }
+
+/* ================= FOOTER ================= */
+footer {
+  padding: 64px 24px;
+  text-align: center;
+  font-size: 14px;
+  color: rgba(0,0,0,.45);
 }
