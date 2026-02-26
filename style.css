@@ -1,94 +1,103 @@
+:root {
+  --text-main: #0f0f0f;
+  --text-sub: #6e6e73;
+}
+
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  margin: 0;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   background: #ffffff;
-  color: #111;
-  line-height: 1.6;
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
 }
 
 /* HERO */
 .hero {
   min-height: 100vh;
-  padding: 80px 20px;
+  padding: 120px 24px 80px;
   text-align: center;
 }
 
 .logo {
-  width: 120px;
+  width: 96px;
+  margin-bottom: 48px;
+}
+
+.hero-title {
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
   margin-bottom: 24px;
 }
 
-h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 16px;
+.hero-title span {
+  display: block;
+  font-weight: 300;
+  color: var(--text-sub);
+  margin-top: 8px;
 }
 
-.tagline {
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 60px;
+.hero-subtitle {
+  font-size: 20px;
+  line-height: 1.6;
+  color: var(--text-sub);
+  margin-bottom: 120px;
 }
 
-.impact {
-  display: flex;
-  justify-content: center;
+/* STATS */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 80px;
-  flex-wrap: wrap;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.impact-number {
-  font-size: 3.5rem;
-  font-weight: 700;
+.stat-number {
+  font-size: clamp(56px, 8vw, 96px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
-.impact-label {
-  color: #777;
+.stat-label {
+  margin-top: 12px;
+  font-size: 16px;
+  color: var(--text-sub);
 }
 
-/* CONTENT */
+/* CONTENT SECTIONS */
 .content {
   max-width: 720px;
   margin: 0 auto;
-  padding: 120px 20px;
+  padding: 160px 24px;
 }
 
-h2 {
-  font-size: 2rem;
-  margin-bottom: 24px;
+.content h2 {
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
 }
 
-p {
-  font-size: 1.1rem;
-  color: #333;
-}
-
-.usage li {
-  margin-bottom: 24px;
+.content p,
+.content li {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--text-main);
 }
 
 /* ANIMATION */
-.fade-in {
-  opacity: 0;
-  animation: fadeIn 1.2s ease forwards;
-}
-
 .fade-up {
   opacity: 0;
-  transform: translateY(40px);
-  transition: all 1s ease;
+  transform: translateY(32px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
 .fade-up.show {
   opacity: 1;
   transform: translateY(0);
-}
-
-@keyframes fadeIn {
-  to { opacity: 1; }
 }
