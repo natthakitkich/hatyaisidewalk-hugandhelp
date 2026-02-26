@@ -1,40 +1,58 @@
-/* RANDOM BACKGROUND */
+/* ================= VIEWPORT FIX (iOS SAFE) ================= */
+function setVH() {
+  document.documentElement.style.setProperty(
+    "--vh",
+    window.innerHeight * 0.01 + "px"
+  );
+}
+setVH();
+window.addEventListener("resize", setVH);
+
+/* ================= RANDOM BG ================= */
 const colors = ["#f2eeef","#ffb5fd","#ff9383","#7ebdfd","#fde152"];
 document.body.style.setProperty(
   "--bg-color",
   colors[Math.floor(Math.random() * colors.length)]
 );
 
-/* GOOGLE SHEETS */
-const SHEET_ID = "1EJFuhZVhscWjO_BTzntYsGpcXO2-vYIK4h3I2qQtw48";
-const SHEET_GID = "2024806268";
-const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=${SHEET_GID}&tqx=out:json`;
-
-let total = 0;
-let count = 0;
-
-fetch(url)
-  .then(r => r.text())
-  .then(t => {
-    const j = JSON.parse(t.substr(47).slice(0, -2));
-    j.table.rows.forEach(r => {
-      const v = r.c[3]?.v;
-      if (typeof v === "number") {
-        total += v;
-        count++;
-      }
-    });
-    animate("totalAmount", total, "฿");
-    animate("partnerCount", count);
-  });
-
-function animate(id, val, prefix = "") {
+/* ================= COUNT UP ================= */
+function animate(id, val, prefix="") {
   const el = document.getElementById(id);
   const start = performance.now();
   const dur = 1600;
 
-  function tick(t) {
-    const p = Math.min((t - start) / dur, 1);
+  function tick(t){
+    const p = Math.min((t-start)/dur,1);
+    el.textContent = prefix + Math.floor(p*val).toLocaleString("th-TH");
+    if(p<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+animate("totalAmount",10855,"฿");
+animate("partnerCount",23);
+
+/* ================= CITY SCROLL ================= */
+const citySection = document.querySelector(".city-scroll");
+const frames = document.querySelectorAll(".city-frame");
+
+window.addEventListener("scroll", () => {
+  const rect = citySection.getBoundingClientRect();
+  const total = citySection.offsetHeight - window.innerHeight;
+  const progress = Math.min(Math.max(-rect.top / total, 0), 0.999);
+  const index = Math.floor(progress * frames.length);
+
+  frames.forEach((f,i)=>f.classList.toggle("active", i===index));
+});
+
+/* ================= PARALLAX LOGO ================= */
+const logo = document.getElementById("parallaxLogo");
+window.addEventListener("scroll",()=>{
+  const p = Math.min(window.scrollY / window.innerHeight,1);
+  if(logo){
+    logo.style.transform = `translateY(${p*-120}px) scale(${1-p*0.4})`;
+  }
+});    const p = Math.min((t - start) / dur, 1);
     el.textContent =
       prefix + Math.floor(p * val).toLocaleString("th-TH");
     if (p < 1) requestAnimationFrame(tick);
