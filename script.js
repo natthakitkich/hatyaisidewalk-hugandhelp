@@ -59,3 +59,27 @@ function animateNumber(id, value, prefix = "") {
 
   requestAnimationFrame(tick);
 }
+/* ===============================
+   Parallax Logo (Apple-style)
+   =============================== */
+
+const logo = document.getElementById("parallaxLogo");
+const heroHeight = window.innerHeight;
+
+window.addEventListener("scroll", () => {
+  if (!logo) return;
+
+  const scrollY = window.scrollY;
+
+  // จำกัดระยะที่ effect ทำงาน (เฉพาะใน hero)
+  const progress = Math.min(scrollY / heroHeight, 1);
+
+  // ค่าที่เราคุม
+  const scale = 1 - progress * 0.4;       // จาก 1 → 0.6
+  const translateY = progress * -120;     // เลื่อนขึ้นเล็กน้อย
+
+  logo.style.transform = `
+    translateY(${translateY}px)
+    scale(${scale})
+  `;
+});
