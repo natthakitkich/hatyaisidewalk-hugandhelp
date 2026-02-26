@@ -1,0 +1,94 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  background: #ffffff;
+  color: #111;
+  line-height: 1.6;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 24px;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 60px;
+}
+
+.impact {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  flex-wrap: wrap;
+}
+
+.impact-number {
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+
+.impact-label {
+  color: #777;
+}
+
+/* CONTENT */
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 120px 20px;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 24px;
+}
+
+p {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.usage li {
+  margin-bottom: 24px;
+}
+
+/* ANIMATION */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s ease;
+}
+
+.fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
