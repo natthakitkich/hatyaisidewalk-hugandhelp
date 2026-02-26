@@ -55,3 +55,19 @@ window.addEventListener("scroll", () => {
   const p = Math.min(scrollY / heroH, 1);
   logo.style.transform = `translateY(${p * -120}px) scale(${1 - p * 0.4})`;
 });
+const palm = document.querySelector(".decor.palm");
+const flower = document.querySelector(".decor.flower");
+
+window.addEventListener("scroll", () => {
+  const scrollY = window.scrollY;
+
+  if (palm) {
+    palm.style.transform =
+      `translateY(${scrollY * 0.2}px) rotate(${scrollY * 0.02}deg)`;
+  }
+
+  if (flower) {
+    flower.style.transform =
+      `translateY(${scrollY * 0.15}px)`;
+  }
+});
