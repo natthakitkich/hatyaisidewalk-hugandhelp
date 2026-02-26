@@ -4,43 +4,41 @@
 
 body {
   margin: 0;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "SF Pro Text",
-    "SF Pro Display",
-    "Helvetica Neue",
-    "Noto Sans Thai",
-    "Thonburi",
-    Arial,
-    sans-serif;
-  color: #111;
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
   background: #fff;
+  color: #111;
 }
 
-/* =========================
-   HERO (TOP SECTION)
-========================= */
+/* =====================
+   SECTION SYSTEM
+===================== */
 
-.hero {
-  position: relative;
+.section {
   min-height: 100vh;
-  padding: 14vh 24px 10vh;
+  padding: 140px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
+.soft {
+  background: #f7f7f8;
+}
+
+/* =====================
+   HERO
+===================== */
+
 .hero-logo {
-  display: block;
-  margin: 0 auto 32px;
-  max-width: 80vw;
   max-height: 52vh;
-  height: auto;
+  margin-bottom: 32px;
 }
 
 .hero-title {
-  font-size: clamp(40px, 6vw, 72px);
+  font-size: clamp(42px, 6vw, 72px);
   font-weight: 600;
-  letter-spacing: -0.02em;
 }
 
 .hero-title span {
@@ -50,28 +48,20 @@ body {
 }
 
 .hero-sub {
-  margin: 24px auto 0;
   max-width: 560px;
-  font-size: 19px;
+  margin-top: 24px;
+  font-size: 20px;
   line-height: 1.8;
   color: #6e6e73;
 }
 
-/* =========================
-   IMPACT NUMBERS
-========================= */
+/* =====================
+   IMPACT
+===================== */
 
 .impact {
-  padding: 140px 24px;
-}
-
-.impact-inner {
-  max-width: 960px;
-  margin: 0 auto;
   display: flex;
-  justify-content: center;
   gap: 160px;
-  text-align: center;
 }
 
 .impact-number {
@@ -80,7 +70,6 @@ body {
   line-height: 1;
 }
 
-/* colorful numbers */
 .money {
   background: linear-gradient(90deg, #00c6ff, #ff5fa2, #ff9f0a);
   -webkit-background-clip: text;
@@ -95,39 +84,32 @@ body {
 
 .impact-label {
   margin-top: 16px;
-  font-size: 16px;
   color: #6e6e73;
 }
 
-/* =========================
+/* =====================
    STORY
-========================= */
-
-.story {
-  padding: 160px 0;
-}
+===================== */
 
 .story-inner {
   max-width: 720px;
-  margin: 0 auto;
-  padding: 0 24px;
 }
 
 .story h2 {
-  font-size: 34px;
+  font-size: 36px;
   margin-bottom: 32px;
 }
 
 .story p,
 .story li {
-  font-size: 19px;
+  font-size: 20px;
   line-height: 1.9;
   color: #444;
 }
 
-/* =========================
-   GALLERY (FULLSCREEN SCROLL)
-========================= */
+/* =====================
+   GALLERY
+===================== */
 
 .gallery {
   height: 400vh;
@@ -138,34 +120,20 @@ body {
   top: 0;
   height: 100vh;
   width: 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
   background-size: contain;
-  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-/* =========================
-   CONTACT
-========================= */
-
-.contact {
-  padding: 160px 24px;
-  text-align: center;
-}
-
-.contact h2 {
-  margin-bottom: 24px;
-}
+/* =====================
+   CONTACT & FOOTER
+===================== */
 
 .contact a {
   font-weight: 600;
   color: #007aff;
   text-decoration: none;
 }
-
-/* =========================
-   FOOTER
-========================= */
 
 footer {
   padding: 64px 24px;
@@ -174,9 +142,24 @@ footer {
   color: #6e6e73;
 }
 
-/* =========================
-   DECOR ELEMENTS (คงเดิม)
-========================= */
+/* =====================
+   REVEAL MOTION
+===================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(48px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =====================
+   DECOR
+===================== */
 
 .decor {
   position: absolute;
@@ -209,17 +192,11 @@ footer {
   100% { transform: translateY(0); }
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media (max-width: 768px) {
-  .impact-inner {
+  .impact {
     flex-direction: column;
     gap: 72px;
-  }
-
-  .hero {
-    padding-top: 16vh;
   }
 }
