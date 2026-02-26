@@ -5,11 +5,14 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-  background: #fff;
   color: #111;
+  background: transparent; /* ใช้สีจาก JS เท่านั้น */
 }
 
-/* SECTION */
+/* =====================
+   SECTION SYSTEM
+===================== */
+
 .section {
   min-height: 100vh;
   padding: 160px 24px;
@@ -20,11 +23,15 @@ body {
   text-align: center;
 }
 
+/* overlay เบา ๆ แทน background */
 .soft-bg {
-  background: #f7f7f8;
+  backdrop-filter: saturate(1.05);
 }
 
-/* HERO */
+/* =====================
+   HERO
+===================== */
+
 .hero-logo {
   max-height: 52vh;
   margin-bottom: 32px;
@@ -38,7 +45,7 @@ body {
 .hero-title span {
   display: block;
   font-weight: 400;
-  color: #6e6e73;
+  color: rgba(0,0,0,0.45);
 }
 
 .hero-sub {
@@ -46,10 +53,13 @@ body {
   margin-top: 24px;
   font-size: 20px;
   line-height: 1.8;
-  color: #6e6e73;
+  color: rgba(0,0,0,0.55);
 }
 
-/* IMPACT */
+/* =====================
+   IMPACT
+===================== */
+
 .impact-block {
   margin: 80px 0;
 }
@@ -74,10 +84,13 @@ body {
 
 .impact-label {
   margin-top: 20px;
-  color: #6e6e73;
+  color: rgba(0,0,0,0.55);
 }
 
-/* STORY */
+/* =====================
+   STORY
+===================== */
+
 .story-inner {
   max-width: 720px;
 }
@@ -91,52 +104,72 @@ body {
 .story li {
   font-size: 20px;
   line-height: 1.9;
-  color: #444;
+  color: rgba(0,0,0,0.65);
 }
 
-/* GALLERY */
-.gallery {
-  height: 400vh;
-}
+/* =====================
+   CONTACT / FOOTER
+===================== */
 
-.gallery-item {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: 100%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-/* CONTACT */
 .contact a {
   font-weight: 600;
   color: #007aff;
   text-decoration: none;
 }
 
-/* FOOTER */
 footer {
   padding: 64px 24px;
   text-align: center;
   font-size: 14px;
-  color: #6e6e73;
+  color: rgba(0,0,0,0.45);
 }
 
-/* REVEAL ANIMATION */
-.reveal {
+/* =====================
+   REVEAL MOTION (Apple-style)
+===================== */
+
+.section.reveal {
   opacity: 0;
-  transform: translateY(48px);
-  transition: opacity 0.9s ease, transform 0.9s ease;
+  transform: translateY(80px);
 }
 
-.reveal.show {
+.section.reveal.show {
   opacity: 1;
   transform: translateY(0);
+  transition:
+    opacity 1s cubic-bezier(.4,0,.2,1),
+    transform 1s cubic-bezier(.4,0,.2,1);
 }
 
-/* DECOR */
+.story h2 {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+.section.show .story h2 {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 0.8s ease;
+}
+
+.story p,
+.story li {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.section.show .story p,
+.section.show .story li {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 0.9s ease;
+  transition-delay: 0.15s;
+}
+
+/* =====================
+   DECOR
+===================== */
+
 .decor {
   position: absolute;
   pointer-events: none;
@@ -172,66 +205,5 @@ footer {
 @media (max-width: 768px) {
   .impact-number {
     font-size: 96px;
-  }
-}
-/* =====================
-   STORY SCROLL MOTION
-===================== */
-
-/* ทั้ง section ขยับ */
-.section.reveal {
-  opacity: 0;
-  transform: translateY(80px);
-}
-
-.section.reveal.show {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 1s cubic-bezier(.4,0,.2,1),
-              transform 1s cubic-bezier(.4,0,.2,1);
-}
-
-/* หัวข้อขึ้นก่อน */
-.story h2 {
-  opacity: 0;
-  transform: translateY(32px);
-}
-
-.section.show .story h2 {
-  opacity: 1;
-  transform: translateY(0);
-  transition: 0.8s ease;
-}
-
-/* เนื้อหาขึ้นตาม */
-.story p,
-.story li {
-  opacity: 0;
-  transform: translateY(24px);
-}
-
-.section.show .story p,
-.section.show .story li {
-  opacity: 1;
-  transform: translateY(0);
-  transition: 0.9s ease;
-  transition-delay: 0.15s;
-}
-/* =====================
-   BACKGROUND ZOOM INTRO
-===================== */
-
-body.bg-intro {
-  animation: bgZoom 1.2s cubic-bezier(.4,0,.2,1) forwards;
-}
-
-@keyframes bgZoom {
-  from {
-    transform: scale(1.05);
-    opacity: 0.96;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
   }
 }
