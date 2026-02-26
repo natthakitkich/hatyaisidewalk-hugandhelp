@@ -5,7 +5,7 @@
 html, body {
   margin: 0;
   width: 100%;
-  overflow-x: hidden; /* 🔒 lock horizontal ทุกแพลตฟอร์ม */
+  overflow-x: hidden;
 }
 
 body {
@@ -14,10 +14,7 @@ body {
   color: #111;
 }
 
-/* =====================
-   SECTION BASE
-===================== */
-
+/* ================= SECTION ================= */
 .section {
   min-height: 100vh;
   padding: 140px 24px;
@@ -38,10 +35,7 @@ body {
   transform: translateY(0);
 }
 
-/* =====================
-   HERO
-===================== */
-
+/* ================= HERO ================= */
 .hero-logo {
   max-height: 52vh;
   margin-bottom: 32px;
@@ -62,10 +56,7 @@ body {
   color: rgba(0,0,0,.55);
 }
 
-/* =====================
-   IMPACT
-===================== */
-
+/* ================= IMPACT ================= */
 .impact-number {
   font-size: clamp(96px, 14vw, 180px);
   font-weight: 700;
@@ -89,10 +80,7 @@ body {
   color: rgba(0,0,0,.55);
 }
 
-/* =====================
-   STORY
-===================== */
-
+/* ================= STORY ================= */
 .story-inner {
   max-width: 720px;
 }
@@ -108,35 +96,34 @@ body {
   line-height: 1.9;
 }
 
-/* =====================
-   🍎 APPLE-STYLE GALLERY
-===================== */
-
-.gallery {
+/* ================= 🍎 APPLE GALLERY ================= */
+.apple-gallery {
   position: relative;
   width: 100vw;
-  height: 400vh; /* 4 ภาพ = 4 จอ */
-  overflow: hidden; /* 🔒 กันภาพล้น */
+  height: 400vh;
+  overflow: hidden;
+
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.gallery-item {
+.apple-gallery-track {
+  width: 100%;
+  height: 100%;
+}
+
+.apple-slide {
   position: sticky;
   top: 0;
-
   width: 100vw;
   height: 100vh;
 
-  background-size: cover;      /* เต็มจอ */
-  background-position: center; /* กลางเสมอ */
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-
-  will-change: transform, opacity;
 }
 
-/* =====================
-   DECOR (PALM / FLOWER)
-===================== */
-
+/* ================= DECOR ================= */
 .decor {
   position: absolute;
   pointer-events: none;
@@ -168,10 +155,7 @@ body {
   100% { transform: translateY(0); }
 }
 
-/* =====================
-   FOOTER
-===================== */
-
+/* ================= FOOTER ================= */
 footer {
   padding: 64px 24px;
   text-align: center;
