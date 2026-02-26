@@ -1,19 +1,28 @@
-// 1. Scroll animation
-const observers = document.querySelectorAll('.fade-up');
+/* ===============================
+   Hatyai Sidewalk – script.js
+   =============================== */
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-    }
-  });
-}, { threshold: 0.2 });
+/* ---------- Scroll Fade-up Animation ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  const fadeUps = document.querySelectorAll(".fade-up");
 
-observers.forEach(el => observer.observe(el));
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
 
+  fadeUps.forEach(el => observer.observe(el));
+});
 
-// 2. Google Sheets fetch
-const sheetURL = "https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/gviz/tq?tqx=out:json";
+/* ---------- Google Sheets Fetch ---------- */
+const sheetURL =
+  "https://docs.google.com/spreadsheets/d/1EJFuhZVhscWjO_BTzntYsGpcXO2-vYIK4h3I2qQtw48/gviz/tq?tqx=out:json";
 
 fetch(sheetURL)
   .then(res => res.text())
@@ -21,20 +30,48 @@ fetch(sheetURL)
     const json = JSON.parse(text.substring(47).slice(0, -2));
     const rows = json.table.rows;
 
-    let total = 0;
-    let partners = 0;
+    let totalAmount = 0;
+    let partnerCount = 0;
 
     rows.forEach(row => {
       if (!row.c) return;
 
+      // Column D = Amount
       const amount = row.c[3] && row.c[3].v;
-      const status = row.c[8] && row.c[8].v;
 
       if (typeof amount === "number") {
-        total += amount;
-        partners++;
+        totalAmount += amount;
+        partnerCount++;
       }
     });
+
+    animateNumber("totalAmount", totalAmount, "฿");
+    animateNumber("partnerCount", partnerCount, "");
+  })
+  .catch(err => {
+    console.error("Error loading Google Sheets data:", err);
+  });
+
+/* ---------- Apple-style Count-up Animation ---------- */
+function animateNumber(elementId, value, prefix = "") {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+
+  const duration = 1800; // ms
+  const start = performance.now();
+
+  function update(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const current = Math.floor(progress * value);
+    el.textContent = prefix + current.toLocaleString();
+
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    }
+  }
+
+  requestAnimationFrame(update);
+}    });
 
     animateNumber("totalAmount", total, "฿");
     animateNumber("partnerCount", partners, "");
