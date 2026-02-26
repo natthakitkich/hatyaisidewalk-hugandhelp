@@ -1,9 +1,11 @@
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 html, body {
   margin: 0;
   width: 100%;
-  overflow-x: hidden;
+  overflow-x: hidden; /* 🔒 lock horizontal ทุกแพลตฟอร์ม */
 }
 
 body {
@@ -12,7 +14,10 @@ body {
   color: #111;
 }
 
-/* SECTION */
+/* =====================
+   SECTION BASE
+===================== */
+
 .section {
   min-height: 100vh;
   padding: 140px 24px;
@@ -21,9 +26,11 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+
   opacity: 0;
   transform: translateY(64px);
-  transition: 1s cubic-bezier(.4,0,.2,1);
+  transition: opacity 1s cubic-bezier(.4,0,.2,1),
+              transform 1s cubic-bezier(.4,0,.2,1);
 }
 
 .section.show {
@@ -31,7 +38,10 @@ body {
   transform: translateY(0);
 }
 
-/* HERO */
+/* =====================
+   HERO
+===================== */
+
 .hero-logo {
   max-height: 52vh;
   margin-bottom: 32px;
@@ -52,10 +62,14 @@ body {
   color: rgba(0,0,0,.55);
 }
 
-/* IMPACT */
+/* =====================
+   IMPACT
+===================== */
+
 .impact-number {
   font-size: clamp(96px, 14vw, 180px);
   font-weight: 700;
+  line-height: 1;
 }
 
 .gradient-money {
@@ -75,7 +89,10 @@ body {
   color: rgba(0,0,0,.55);
 }
 
-/* STORY */
+/* =====================
+   STORY
+===================== */
+
 .story-inner {
   max-width: 720px;
 }
@@ -85,58 +102,76 @@ body {
   margin-bottom: 32px;
 }
 
-.story p, .story li {
+.story p,
+.story li {
   font-size: 20px;
   line-height: 1.9;
 }
 
-/* GALLERY */
+/* =====================
+   🍎 APPLE-STYLE GALLERY
+===================== */
+
 .gallery {
-  height: 400vh;
+  position: relative;
+  width: 100vw;
+  height: 400vh; /* 4 ภาพ = 4 จอ */
+  overflow: hidden; /* 🔒 กันภาพล้น */
 }
 
 .gallery-item {
   position: sticky;
   top: 0;
+
+  width: 100vw;
   height: 100vh;
-  width: 100%;
-  background-size: cover;
-  background-position: center;
+
+  background-size: cover;      /* เต็มจอ */
+  background-position: center; /* กลางเสมอ */
+  background-repeat: no-repeat;
+
+  will-change: transform, opacity;
 }
 
-/* DECOR */
+/* =====================
+   DECOR (PALM / FLOWER)
+===================== */
+
 .decor {
   position: absolute;
   pointer-events: none;
 }
 
 .decor.palm {
-  width: min(60vw,520px);
+  width: min(60vw, 520px);
   left: -20px;
   bottom: -20px;
   animation: sway 4s ease-in-out infinite;
 }
 
 .decor.flower {
-  width: min(50vw,420px);
+  width: min(50vw, 420px);
   right: -20px;
   bottom: -10px;
   animation: bounce 3.5s ease-in-out infinite;
 }
 
 @keyframes sway {
-  0%{transform:rotate(-3deg)}
-  50%{transform:rotate(3deg)}
-  100%{transform:rotate(-3deg)}
+  0% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+  100% { transform: rotate(-3deg); }
 }
 
 @keyframes bounce {
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-14px)}
-  100%{transform:translateY(0)}
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+  100% { transform: translateY(0); }
 }
 
-/* FOOTER */
+/* =====================
+   FOOTER
+===================== */
+
 footer {
   padding: 64px 24px;
   text-align: center;
