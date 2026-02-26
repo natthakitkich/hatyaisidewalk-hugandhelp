@@ -9,13 +9,10 @@ body {
   color: #111;
 }
 
-/* =====================
-   SECTION SYSTEM
-===================== */
-
+/* SECTION */
 .section {
   min-height: 100vh;
-  padding: 140px 24px;
+  padding: 160px 24px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,14 +20,11 @@ body {
   text-align: center;
 }
 
-.soft {
+.soft-bg {
   background: #f7f7f8;
 }
 
-/* =====================
-   HERO
-===================== */
-
+/* HERO */
 .hero-logo {
   max-height: 52vh;
   margin-bottom: 32px;
@@ -55,42 +49,35 @@ body {
   color: #6e6e73;
 }
 
-/* =====================
-   IMPACT
-===================== */
-
-.impact {
-  display: flex;
-  gap: 160px;
+/* IMPACT */
+.impact-block {
+  margin: 80px 0;
 }
 
 .impact-number {
-  font-size: clamp(88px, 12vw, 160px);
+  font-size: clamp(96px, 14vw, 180px);
   font-weight: 700;
   line-height: 1;
 }
 
-.money {
+.gradient-money {
   background: linear-gradient(90deg, #00c6ff, #ff5fa2, #ff9f0a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.partner {
+.gradient-partner {
   background: linear-gradient(90deg, #34c759, #007aff, #ffd60a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .impact-label {
-  margin-top: 16px;
+  margin-top: 20px;
   color: #6e6e73;
 }
 
-/* =====================
-   STORY
-===================== */
-
+/* STORY */
 .story-inner {
   max-width: 720px;
 }
@@ -107,10 +94,7 @@ body {
   color: #444;
 }
 
-/* =====================
-   GALLERY
-===================== */
-
+/* GALLERY */
 .gallery {
   height: 400vh;
 }
@@ -125,16 +109,14 @@ body {
   background-position: center;
 }
 
-/* =====================
-   CONTACT & FOOTER
-===================== */
-
+/* CONTACT */
 .contact a {
   font-weight: 600;
   color: #007aff;
   text-decoration: none;
 }
 
+/* FOOTER */
 footer {
   padding: 64px 24px;
   text-align: center;
@@ -142,14 +124,11 @@ footer {
   color: #6e6e73;
 }
 
-/* =====================
-   REVEAL MOTION
-===================== */
-
+/* REVEAL ANIMATION */
 .reveal {
   opacity: 0;
   transform: translateY(48px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition: opacity 0.9s ease, transform 0.9s ease;
 }
 
 .reveal.show {
@@ -157,10 +136,7 @@ footer {
   transform: translateY(0);
 }
 
-/* =====================
-   DECOR
-===================== */
-
+/* DECOR */
 .decor {
   position: absolute;
   pointer-events: none;
@@ -193,10 +169,8 @@ footer {
 }
 
 /* MOBILE */
-
 @media (max-width: 768px) {
-  .impact {
-    flex-direction: column;
-    gap: 72px;
+  .impact-number {
+    font-size: 96px;
   }
 }
