@@ -5,7 +5,7 @@
 html, body {
   margin: 0;
   width: 100%;
-  overflow-x: hidden;
+  overflow-x: hidden; /* 🔒 lock horizontal ทุกแพลตฟอร์ม */
 }
 
 body {
@@ -110,7 +110,7 @@ body {
 }
 
 /* =====================================================
-   🍎 CITY GALLERY — FIXED VERSION (THIS IS THE KEY)
+   🍎 CITY GALLERY — APPLE STYLE (FIXED)
 ===================================================== */
 
 .gallery {
@@ -118,16 +118,6 @@ body {
   width: 100vw;
   height: 400vh;          /* 4 ภาพ = 4 viewport */
   overflow: hidden;
-
-  z-index: 10;            /* 🔥 บังคับให้อยู่บน section */
-}
-
-/* isolate stacking context */
-.gallery::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: transparent;
 }
 
 .gallery-item {
@@ -140,8 +130,11 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
 
-  z-index: 11;
+/* 🔥 ตัวสำคัญ: ดันภาพทีละ viewport */
+.gallery-item:not(:first-child) {
+  margin-top: 100vh;
 }
 
 /* =====================
