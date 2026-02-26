@@ -1,10 +1,7 @@
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html, body {
   margin: 0;
-  padding: 0;
   width: 100%;
   overflow-x: hidden;
 }
@@ -18,7 +15,7 @@ body {
 /* SECTION */
 .section {
   min-height: 100vh;
-  padding: 160px 24px;
+  padding: 140px 24px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -26,7 +23,7 @@ body {
   text-align: center;
   opacity: 0;
   transform: translateY(64px);
-  transition: opacity 1s ease, transform 1s ease;
+  transition: 1s cubic-bezier(.4,0,.2,1);
 }
 
 .section.show {
@@ -47,12 +44,10 @@ body {
 
 .hero-title span {
   display: block;
-  font-weight: 400;
   color: rgba(0,0,0,.45);
 }
 
 .hero-sub {
-  margin-top: 24px;
   font-size: 20px;
   color: rgba(0,0,0,.55);
 }
@@ -75,29 +70,36 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+.impact-label {
+  margin-top: 16px;
+  color: rgba(0,0,0,.55);
+}
+
 /* STORY */
 .story-inner {
   max-width: 720px;
 }
 
+.story h2 {
+  font-size: 36px;
+  margin-bottom: 32px;
+}
+
 .story p, .story li {
   font-size: 20px;
   line-height: 1.9;
-  color: rgba(0,0,0,.65);
 }
 
 /* GALLERY */
 .gallery {
   height: 400vh;
-  width: 100vw;
-  overflow: hidden;
 }
 
 .gallery-item {
   position: sticky;
   top: 0;
-  width: 100vw;
   height: 100vh;
+  width: 100%;
   background-size: cover;
   background-position: center;
 }
@@ -109,13 +111,35 @@ body {
 }
 
 .decor.palm {
-  width: min(55vw, 480px);
-  bottom: -40px;
-  left: -40px;
+  width: min(60vw,520px);
+  left: -20px;
+  bottom: -20px;
+  animation: sway 4s ease-in-out infinite;
 }
 
 .decor.flower {
-  width: min(45vw, 380px);
-  bottom: -30px;
-  right: -30px;
+  width: min(50vw,420px);
+  right: -20px;
+  bottom: -10px;
+  animation: bounce 3.5s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%{transform:rotate(-3deg)}
+  50%{transform:rotate(3deg)}
+  100%{transform:rotate(-3deg)}
+}
+
+@keyframes bounce {
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-14px)}
+  100%{transform:translateY(0)}
+}
+
+/* FOOTER */
+footer {
+  padding: 64px 24px;
+  text-align: center;
+  font-size: 14px;
+  color: rgba(0,0,0,.45);
 }
