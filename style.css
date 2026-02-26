@@ -121,3 +121,59 @@ footer {
     gap: 64px;
   }
 }
+/* =========================
+   FUN DECOR ELEMENTS
+========================= */
+
+.decor {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform;
+  transition: transform 0.2s linear;
+}
+
+/* 🌴 PALM TREE */
+.decor.palm {
+  width: min(40vw, 360px);
+  bottom: -60px;
+  left: -80px;
+  transform-origin: bottom center;
+  opacity: 0.95;
+  animation: sway 6s ease-in-out infinite;
+}
+
+/* 🌸 FLOWER BUSH */
+.decor.flower {
+  width: min(32vw, 280px);
+  bottom: -40px;
+  right: -60px;
+  transform-origin: bottom center;
+  opacity: 0.95;
+  animation: bounce 5s ease-in-out infinite;
+}
+
+/* playful motion */
+@keyframes sway {
+  0% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+  100% { transform: rotate(-2deg); }
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .decor.palm {
+    width: 260px;
+    left: -100px;
+  }
+
+  .decor.flower {
+    width: 220px;
+    right: -80px;
+  }
+}
