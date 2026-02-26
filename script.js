@@ -1,19 +1,21 @@
-/* ================= iOS VIEWPORT FIX ================= */
+/* iOS viewport fix */
 function setVH() {
-  const vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty("--vh", `${vh}px`);
+  document.documentElement.style.setProperty(
+    "--vh",
+    window.innerHeight * 0.01 + "px"
+  );
 }
 setVH();
 window.addEventListener("resize", setVH);
 
-/* ================= RANDOM BACKGROUND ================= */
+/* RANDOM BG */
 const colors = ["#f2eeef","#ffb5fd","#ff9383","#7ebdfd","#fde152"];
 document.body.style.setProperty(
   "--bg-color",
   colors[Math.floor(Math.random() * colors.length)]
 );
 
-/* ================= GOOGLE SHEETS ================= */
+/* GOOGLE SHEETS */
 const SHEET_ID = "1EJFuhZVhscWjO_BTzntYsGpcXO2-vYIK4h3I2qQtw48";
 const SHEET_GID = "2024806268";
 const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=${SHEET_GID}&tqx=out:json`;
@@ -49,19 +51,14 @@ function animate(id, val, prefix="") {
   requestAnimationFrame(tick);
 }
 
-/* ================= REVEAL OBSERVER ================= */
+/* REVEAL */
 const io = new IntersectionObserver(
-  entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add("show");
-    });
-  },
-  { threshold: 0.3 }
+  es => es.forEach(e => e.isIntersecting && e.target.classList.add("show")),
+  { threshold: 0.25 }
 );
+document.querySelectorAll(".reveal").forEach(s => io.observe(s));
 
-document.querySelectorAll(".reveal").forEach(el => io.observe(el));
-
-/* ================= PARALLAX LOGO ================= */
+/* PARALLAX LOGO */
 const logo = document.getElementById("parallaxLogo");
 window.addEventListener("scroll",()=>{
   const p = Math.min(window.scrollY / window.innerHeight,1);
