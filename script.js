@@ -1,4 +1,20 @@
 /* ===============================
+   RANDOM BACKGROUND ON LOAD
+=============================== */
+const bgColors = [
+  "#f2eeef",
+  "#ffb5fd",
+  "#ff9383",
+  "#7ebdfd",
+  "#7ebdfd",
+  "#fde152"
+];
+
+const randomBg = bgColors[Math.floor(Math.random() * bgColors.length)];
+document.body.style.backgroundColor = randomBg;
+document.body.classList.add("bg-intro");
+
+/* ===============================
    GOOGLE SHEETS
 =============================== */
 const SHEET_ID = "1EJFuhZVhscWjO_BTzntYsGpcXO2-vYIK4h3I2qQtw48";
@@ -25,7 +41,7 @@ fetch(sheetURL)
   });
 
 /* ===============================
-   COUNT UP (APPLE STYLE)
+   COUNT UP
 =============================== */
 function animate(id, value, prefix = "") {
   const el = document.getElementById(id);
@@ -34,8 +50,8 @@ function animate(id, value, prefix = "") {
 
   function tick(now) {
     const progress = Math.min((now - start) / duration, 1);
-    const current = Math.floor(progress * value);
-    el.textContent = prefix + current.toLocaleString("th-TH");
+    el.textContent =
+      prefix + Math.floor(progress * value).toLocaleString("th-TH");
     if (progress < 1) requestAnimationFrame(tick);
   }
 
@@ -66,7 +82,7 @@ if (impactSection) {
 }
 
 /* ===============================
-   REVEAL MOTION (STORY SCROLL)
+   REVEAL MOTION
 =============================== */
 const sections = document.querySelectorAll(".section.reveal");
 
@@ -84,9 +100,7 @@ const revealObserver = new IntersectionObserver(
   }
 );
 
-sections.forEach(section => {
-  revealObserver.observe(section);
-});
+sections.forEach(section => revealObserver.observe(section));
 
 /* ===============================
    PARALLAX LOGO + DECOR
