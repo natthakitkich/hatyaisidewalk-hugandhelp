@@ -24,7 +24,7 @@ window.addEventListener("scroll", () => {
 });
 
 /* ===============================
-   Fetch Data (but DO NOT animate yet)
+   Fetch Data
    =============================== */
 let totalAmount = 0;
 let partnerCount = 0;
@@ -49,25 +49,22 @@ fetch(sheetURL)
   });
 
 /* ===============================
-   Animate when section is visible
+   Animate Numbers on View
    =============================== */
 const impactSection = document.getElementById("impactSection");
 let hasAnimated = false;
 
-const impactObserver = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && dataReady && !hasAnimated) {
-        animateNumber("totalAmount", totalAmount, "฿");
-        animateNumber("partnerCount", partnerCount);
-        hasAnimated = true;
-      }
-    });
-  },
-  { threshold: 0.4 }
-);
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && dataReady && !hasAnimated) {
+      animateNumber("totalAmount", totalAmount, "฿");
+      animateNumber("partnerCount", partnerCount);
+      hasAnimated = true;
+    }
+  });
+}, { threshold: 0.4 });
 
-impactObserver.observe(impactSection);
+observer.observe(impactSection);
 
 /* ===============================
    Apple-style Count Up
@@ -79,7 +76,8 @@ function animateNumber(id, value, prefix = "") {
 
   function tick(now) {
     const progress = Math.min((now - start) / duration, 1);
-    const current = Math.floor(progress * value);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.floor(eased * value);
     el.textContent = prefix + current.toLocaleString("th-TH");
     if (progress < 1) requestAnimationFrame(tick);
   }
@@ -87,28 +85,14 @@ function animateNumber(id, value, prefix = "") {
   requestAnimationFrame(tick);
 }
 
-
 /* ===============================
-   Parallax Logo (Apple-style)
+   Fade Reveal
    =============================== */
+const fades = document.querySelectorAll(".fade");
+const fadeObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add("show");
+  });
+}, { threshold: 0.2 });
 
-const logo = document.getElementById("parallaxLogo");
-const heroHeight = window.innerHeight;
-
-window.addEventListener("scroll", () => {
-  if (!logo) return;
-
-  const scrollY = window.scrollY;
-
-  // จำกัดระยะที่ effect ทำงาน (เฉพาะใน hero)
-  const progress = Math.min(scrollY / heroHeight, 1);
-
-  // ค่าที่เราคุม
-  const scale = 1 - progress * 0.4;       // จาก 1 → 0.6
-  const translateY = progress * -120;     // เลื่อนขึ้นเล็กน้อย
-
-  logo.style.transform = `
-    translateY(${translateY}px)
-    scale(${scale})
-  `;
-});
+fades.forEach(el => fadeObserver.observe(el));
