@@ -7,6 +7,7 @@ body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   color: #111;
   background: #fff;
+  overflow-x: hidden; /* ป้องกันล้นจอ */
 }
 
 /* HERO */
@@ -14,6 +15,7 @@ body {
   height: 100vh;
   text-align: center;
   padding: 10vh 24px;
+  position: relative;
 }
 
 .hero-logo {
@@ -35,6 +37,156 @@ body {
 }
 
 .hero-sub {
+  margin-top: 24px;
+  font-size: 20px;
+  color: #6e6e73;
+}
+
+/* =========================
+   FUN DECOR ELEMENTS
+========================= */
+
+.decor {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* 🌴 PALM TREE */
+.decor.palm {
+  width: min(40vw, 360px);
+  bottom: -60px;
+  left: -80px;
+  transform-origin: bottom center;
+  opacity: 0.95;
+  animation: sway 4s ease-in-out infinite;
+}
+
+/* 🌸 FLOWER BUSH */
+.decor.flower {
+  width: min(32vw, 280px);
+  bottom: -40px;
+  right: -60px;
+  transform-origin: bottom center;
+  opacity: 0.95;
+  animation: bounce 3.5s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+  100% { transform: rotate(-4deg); }
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+  100% { transform: translateY(0); }
+}
+
+/* IMPACT */
+.impact {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.impact-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  text-align: center;
+}
+
+/* 🌈 Gradient Numbers */
+.impact-number.money {
+  font-size: clamp(88px, 10vw, 150px);
+  font-weight: 700;
+  background: linear-gradient(90deg, #4facfe, #f093fb, #f5576c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.impact-number.partner {
+  font-size: clamp(72px, 8vw, 120px);
+  font-weight: 700;
+  background: linear-gradient(90deg, #43e97b, #38f9d7, #fddb92);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.impact-label {
+  margin-top: 12px;
+  color: #6e6e73;
+  font-size: 16px;
+}
+
+/* STORY */
+.story {
+  max-width: 720px;
+  margin: 120px auto;
+  padding: 0 24px;
+}
+
+.story h2 {
+  font-size: 32px;
+  margin-top: 64px;
+}
+
+.story p, .story li {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #444;
+}
+
+/* GALLERY */
+.gallery {
+  height: 400vh;
+}
+
+.gallery-item {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain; /* 🔒 ไม่ล้นจอ */
+  background-color: #fff;
+}
+
+/* CONTACT */
+.contact {
+  padding: 120px 24px;
+  text-align: center;
+}
+
+.contact a {
+  font-weight: 600;
+  color: #007aff;
+  text-decoration: none;
+}
+
+/* FOOTER */
+footer {
+  padding: 48px 24px;
+  text-align: center;
+  font-size: 14px;
+  color: #6e6e73;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .decor.palm {
+    width: 260px;
+    left: -100px;
+  }
+
+  .decor.flower {
+    width: 220px;
+    right: -80px;
+  }
+}.hero-sub {
   margin-top: 24px;
   font-size: 20px;
   color: #6e6e73;
