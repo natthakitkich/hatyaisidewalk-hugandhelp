@@ -1,34 +1,20 @@
 /* ===============================
-   Hatyai Sidewalk – script.js
+   Hatyai Sidewalk – Data Script
    =============================== */
 
-/* ---------- Scroll Fade-up Animation ---------- */
-document.addEventListener("DOMContentLoaded", () => {
-  const fadeUps = document.querySelectorAll(".fade-up");
+const SHEET_ID = "1EJFuhZVhscWjO_BTzntYsGpcXO2-vYIK4h3I2qQtw48";
+const SHEET_GID = "2024806268";
 
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-        }
-      });
-    },
-    { threshold: 0.2 }
-  );
-
-  fadeUps.forEach(el => observer.observe(el));
-});
-
-/* ---------- Google Sheets Fetch ---------- */
 const sheetURL =
-  "https://docs.google.com/spreadsheets/d/1EJFuhZVhscWjO_BTzntYsGpcXO2-vYIK4h3I2qQtw48/gviz/tq?tqx=out:json";
+  `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=${SHEET_GID}&tqx=out:json`;
 
 fetch(sheetURL)
   .then(res => res.text())
   .then(text => {
-    const json = JSON.parse(text.substring(47).slice(0, -2));
-    const rows = json.table.rows;
+    const jsonText = text.substring(47).slice(0, -2);
+    const data = JSON.parse(jsonText);
+
+    const rows = data.table.rows;
 
     let totalAmount = 0;
     let partnerCount = 0;
@@ -36,60 +22,40 @@ fetch(sheetURL)
     rows.forEach(row => {
       if (!row.c) return;
 
-      // Column D = Amount
-      const amount = row.c[3] && row.c[3].v;
+      // Column D (Amount)
+      const amountCell = row.c[3];
+      const amount = amountCell && amountCell.v;
 
       if (typeof amount === "number") {
         totalAmount += amount;
-        partnerCount++;
+        partnerCount += 1;
       }
     });
 
     animateNumber("totalAmount", totalAmount, "฿");
-    animateNumber("partnerCount", partnerCount, "");
+    animateNumber("partnerCount", partnerCount);
   })
   .catch(err => {
-    console.error("Error loading Google Sheets data:", err);
+    console.error("Google Sheets error:", err);
   });
 
-/* ---------- Apple-style Count-up Animation ---------- */
-function animateNumber(elementId, value, prefix = "") {
-  const el = document.getElementById(elementId);
+/* Apple-style count up */
+function animateNumber(id, value, prefix = "") {
+  const el = document.getElementById(id);
   if (!el) return;
 
-  const duration = 1800; // ms
+  const duration = 1800;
   const start = performance.now();
 
-  function update(now) {
+  function tick(now) {
     const progress = Math.min((now - start) / duration, 1);
     const current = Math.floor(progress * value);
-    el.textContent = prefix + current.toLocaleString();
+    el.textContent = prefix + current.toLocaleString("th-TH");
 
     if (progress < 1) {
-      requestAnimationFrame(update);
+      requestAnimationFrame(tick);
     }
   }
 
-  requestAnimationFrame(update);
-}    });
-
-    animateNumber("totalAmount", total, "฿");
-    animateNumber("partnerCount", partners, "");
-  });
-
-
-// 3. Count-up animation
-function animateNumber(id, value, prefix) {
-  const el = document.getElementById(id);
-  let current = 0;
-  const increment = value / 60;
-
-  const interval = setInterval(() => {
-    current += increment;
-    if (current >= value) {
-      current = value;
-      clearInterval(interval);
-    }
-    el.textContent = prefix + Math.floor(current).toLocaleString();
-  }, 16);
+  requestAnimationFrame(tick);
 }
