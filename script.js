@@ -1,4 +1,4 @@
-/* iOS viewport fix */
+/* ================= iOS VIEWPORT FIX ================= */
 function setVH() {
   document.documentElement.style.setProperty(
     "--vh",
@@ -8,14 +8,14 @@ function setVH() {
 setVH();
 window.addEventListener("resize", setVH);
 
-/* RANDOM BG */
+/* ================= RANDOM BACKGROUND ================= */
 const colors = ["#f2eeef","#ffb5fd","#ff9383","#7ebdfd","#fde152"];
 document.body.style.setProperty(
   "--bg-color",
   colors[Math.floor(Math.random() * colors.length)]
 );
 
-/* GOOGLE SHEETS */
+/* ================= GOOGLE SHEETS ================= */
 const SHEET_ID = "1EJFuhZVhscWjO_BTzntYsGpcXO2-vYIK4h3I2qQtw48";
 const SHEET_GID = "2024806268";
 const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=${SHEET_GID}&tqx=out:json`;
@@ -51,14 +51,19 @@ function animate(id, val, prefix="") {
   requestAnimationFrame(tick);
 }
 
-/* REVEAL */
+/* ================= REVEAL ================= */
 const io = new IntersectionObserver(
-  es => es.forEach(e => e.isIntersecting && e.target.classList.add("show")),
-  { threshold: 0.25 }
+  entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add("show");
+    });
+  },
+  { threshold: 0.3 }
 );
-document.querySelectorAll(".reveal").forEach(s => io.observe(s));
 
-/* PARALLAX LOGO */
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+/* ================= PARALLAX LOGO ================= */
 const logo = document.getElementById("parallaxLogo");
 window.addEventListener("scroll",()=>{
   const p = Math.min(window.scrollY / window.innerHeight,1);
@@ -67,3 +72,21 @@ window.addEventListener("scroll",()=>{
       `translateY(${p*-120}px) scale(${1-p*0.4})`;
   }
 });
+
+/* ================= CITY FADE ================= */
+const cityItems = document.querySelectorAll(".city-item.fade");
+
+const cityObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      } else {
+        entry.target.classList.remove("show");
+      }
+    });
+  },
+  { threshold: 0.5 }
+);
+
+cityItems.forEach(item => cityObserver.observe(item));
