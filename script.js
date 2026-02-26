@@ -1,4 +1,6 @@
-/* ================= VIEWPORT FIX (iOS SAFE) ================= */
+/* ===============================
+   VIEWPORT FIX (iOS SAFE)
+=============================== */
 function setVH() {
   document.documentElement.style.setProperty(
     "--vh",
@@ -8,81 +10,115 @@ function setVH() {
 setVH();
 window.addEventListener("resize", setVH);
 
-/* ================= RANDOM BG ================= */
-const colors = ["#f2eeef","#ffb5fd","#ff9383","#7ebdfd","#fde152"];
+/* ===============================
+   RANDOM BACKGROUND
+=============================== */
+const bgColors = ["#f2eeef","#ffb5fd","#ff9383","#7ebdfd","#fde152"];
 document.body.style.setProperty(
   "--bg-color",
-  colors[Math.floor(Math.random() * colors.length)]
+  bgColors[Math.floor(Math.random() * bgColors.length)]
 );
 
-/* ================= COUNT UP ================= */
-function animate(id, val, prefix="") {
+/* ===============================
+   GOOGLE SHEETS
+=============================== */
+const SHEET_ID = "1EJFuhZVhscWjO_BTzntYsGpcXO2-vYIK4h3I2qQtw48";
+const SHEET_GID = "2024806268";
+const sheetURL =
+  `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=${SHEET_GID}&tqx=out:json`;
+
+let totalAmount = 0;
+let partnerCount = 0;
+let dataReady = false;
+
+fetch(sheetURL)
+  .then(res => res.text())
+  .then(text => {
+    const json = JSON.parse(text.substring(47).slice(0, -2));
+    json.table.rows.forEach(row => {
+      const amount = row.c[3]?.v;
+      if (typeof amount === "number") {
+        totalAmount += amount;
+        partnerCount++;
+      }
+    });
+    dataReady = true;
+  });
+
+/* ===============================
+   COUNT UP
+=============================== */
+function animateNumber(id, value, prefix = "") {
   const el = document.getElementById(id);
   const start = performance.now();
-  const dur = 1600;
+  const duration = 1600;
 
-  function tick(t){
-    const p = Math.min((t-start)/dur,1);
-    el.textContent = prefix + Math.floor(p*val).toLocaleString("th-TH");
-    if(p<1) requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-}
-
-animate("totalAmount",10855,"฿");
-animate("partnerCount",23);
-
-/* ================= CITY SCROLL ================= */
-const citySection = document.querySelector(".city-scroll");
-const frames = document.querySelectorAll(".city-frame");
-
-window.addEventListener("scroll", () => {
-  const rect = citySection.getBoundingClientRect();
-  const total = citySection.offsetHeight - window.innerHeight;
-  const progress = Math.min(Math.max(-rect.top / total, 0), 0.999);
-  const index = Math.floor(progress * frames.length);
-
-  frames.forEach((f,i)=>f.classList.toggle("active", i===index));
-});
-
-/* ================= PARALLAX LOGO ================= */
-const logo = document.getElementById("parallaxLogo");
-window.addEventListener("scroll",()=>{
-  const p = Math.min(window.scrollY / window.innerHeight,1);
-  if(logo){
-    logo.style.transform = `translateY(${p*-120}px) scale(${1-p*0.4})`;
-  }
-});    const p = Math.min((t - start) / dur, 1);
+  function tick(now) {
+    const progress = Math.min((now - start) / duration, 1);
     el.textContent =
-      prefix + Math.floor(p * val).toLocaleString("th-TH");
-    if (p < 1) requestAnimationFrame(tick);
+      prefix + Math.floor(progress * value).toLocaleString("th-TH");
+    if (progress < 1) requestAnimationFrame(tick);
   }
+
   requestAnimationFrame(tick);
 }
 
-/* REVEAL */
-const io = new IntersectionObserver(
-  es => es.forEach(e => e.isIntersecting && e.target.classList.add("show")),
+/* ===============================
+   IMPACT OBSERVER
+=============================== */
+const impactSection = document.getElementById("impactSection");
+let impactPlayed = false;
+
+const impactObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && dataReady && !impactPlayed) {
+        animateNumber("totalAmount", totalAmount, "฿");
+        animateNumber("partnerCount", partnerCount);
+        impactPlayed = true;
+      }
+    });
+  },
+  { threshold: 0.4 }
+);
+
+if (impactSection) impactObserver.observe(impactSection);
+
+/* ===============================
+   SECTION REVEAL
+=============================== */
+const sections = document.querySelectorAll(".section");
+
+const revealObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      }
+    });
+  },
   { threshold: 0.25 }
 );
 
-document.querySelectorAll(".section").forEach(s => io.observe(s));
+sections.forEach(section => revealObserver.observe(section));
 
-/* PARALLAX LOGO */
+/* ===============================
+   PARALLAX LOGO
+=============================== */
 const logo = document.getElementById("parallaxLogo");
-const heroH = window.innerHeight;
+const heroHeight = window.innerHeight;
 
 window.addEventListener("scroll", () => {
-  const p = Math.min(window.scrollY / heroH, 1);
+  const progress = Math.min(window.scrollY / heroHeight, 1);
   if (logo) {
     logo.style.transform =
-      `translateY(${p * -120}px) scale(${1 - p * 0.4})`;
+      `translateY(${progress * -120}px) scale(${1 - progress * 0.4})`;
   }
 });
-/* ===============================
-   CITY SCROLL CONTROLLER
-=============================== */
 
+/* ===============================
+   🍎 CITY SCROLL CONTROLLER
+=============================== */
 const citySection = document.querySelector(".city-scroll");
 const cityFrames = document.querySelectorAll(".city-frame");
 
@@ -90,6 +126,7 @@ if (citySection && cityFrames.length) {
   window.addEventListener("scroll", () => {
     const rect = citySection.getBoundingClientRect();
     const totalScroll = citySection.offsetHeight - window.innerHeight;
+
     const progress = Math.min(
       Math.max(-rect.top / totalScroll, 0),
       0.999
@@ -97,8 +134,8 @@ if (citySection && cityFrames.length) {
 
     const index = Math.floor(progress * cityFrames.length);
 
-    cityFrames.forEach((f, i) => {
-      f.classList.toggle("active", i === index);
+    cityFrames.forEach((frame, i) => {
+      frame.classList.toggle("active", i === index);
     });
   });
 }
