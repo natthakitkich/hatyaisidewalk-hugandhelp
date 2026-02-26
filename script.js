@@ -1,14 +1,12 @@
-/* ================= iOS SAFE VH ================= */
+/* ================= iOS VIEWPORT FIX ================= */
 function setVH() {
-  document.documentElement.style.setProperty(
-    "--vh",
-    window.innerHeight * 0.01 + "px"
-  );
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
 }
 setVH();
 window.addEventListener("resize", setVH);
 
-/* ================= RANDOM BG ================= */
+/* ================= RANDOM BACKGROUND ================= */
 const colors = ["#f2eeef","#ffb5fd","#ff9383","#7ebdfd","#fde152"];
 document.body.style.setProperty(
   "--bg-color",
