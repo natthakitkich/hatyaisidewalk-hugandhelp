@@ -7,21 +7,27 @@ body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   color: #111;
   background: #fff;
-  overflow-x: hidden; /* ป้องกันล้นจอ */
+}
+
+/* SECTION CENTER */
+.section-center {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 24px;
 }
 
 /* HERO */
 .hero {
-  height: 100vh;
-  text-align: center;
-  padding: 10vh 24px;
   position: relative;
 }
 
 .hero-logo {
   height: 50vh;
   max-height: 520px;
-  will-change: transform;
+  margin-bottom: 32px;
 }
 
 .hero-title {
@@ -40,42 +46,138 @@ body {
   margin-top: 24px;
   font-size: 20px;
   color: #6e6e73;
+  line-height: 1.7;
 }
 
-/* =========================
-   FUN DECOR ELEMENTS
-========================= */
+/* IMPACT */
+.impact-inner {
+  display: flex;
+  gap: 160px;
+}
 
+.impact-number {
+  font-size: clamp(88px, 12vw, 160px);
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* รองรับทั้งชื่อเดิม + ชื่อใหม่ */
+.gradient-money,
+.money {
+  background: linear-gradient(90deg, #00c6ff, #ff5fa2, #ff9f0a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-partner,
+.partner {
+  background: linear-gradient(90deg, #34c759, #007aff, #ffd60a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.impact-label {
+  margin-top: 16px;
+  color: #6e6e73;
+  font-size: 16px;
+}
+
+/* STORY */
+.story {
+  padding: 120px 0;
+}
+
+.story-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.story h2 {
+  font-size: 36px;
+  margin-bottom: 32px;
+}
+
+.story p,
+.story li {
+  font-size: 20px;
+  line-height: 1.9;
+  color: #444;
+}
+
+.story ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.story ul li {
+  margin-bottom: 24px;
+}
+
+.soft-bg {
+  background: #f7f7f8;
+}
+
+/* GALLERY */
+.gallery {
+  height: 400vh;
+}
+
+.gallery-item {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;   /* 🔒 ไม่ล้น ไม่ครอป */
+  background-color: #ffffff; /* รองขอบ */
+}
+
+/* CONTACT */
+.contact h2 {
+  margin-bottom: 24px;
+}
+
+.contact a {
+  font-weight: 600;
+  color: #007aff;
+  text-decoration: none;
+}
+
+/* FOOTER */
+footer {
+  padding: 64px 24px;
+  text-align: center;
+  font-size: 14px;
+  color: #6e6e73;
+}
+
+/* DECOR ELEMENTS */
 .decor {
   position: absolute;
   pointer-events: none;
-  will-change: transform;
 }
 
-/* 🌴 PALM TREE */
+/* 🌴 */
 .decor.palm {
   width: min(40vw, 360px);
   bottom: -60px;
   left: -80px;
-  transform-origin: bottom center;
-  opacity: 0.95;
   animation: sway 4s ease-in-out infinite;
 }
 
-/* 🌸 FLOWER BUSH */
+/* 🌸 */
 .decor.flower {
   width: min(32vw, 280px);
   bottom: -40px;
   right: -60px;
-  transform-origin: bottom center;
-  opacity: 0.95;
   animation: bounce 3.5s ease-in-out infinite;
 }
 
 @keyframes sway {
-  0% { transform: rotate(-4deg); }
-  50% { transform: rotate(4deg); }
-  100% { transform: rotate(-4deg); }
+  0% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+  100% { transform: rotate(-3deg); }
 }
 
 @keyframes bounce {
@@ -84,248 +186,14 @@ body {
   100% { transform: translateY(0); }
 }
 
-/* IMPACT */
-.impact {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.impact-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 80px;
-  text-align: center;
-}
-
-/* 🌈 Gradient Numbers */
-.impact-number.money {
-  font-size: clamp(88px, 10vw, 150px);
-  font-weight: 700;
-  background: linear-gradient(90deg, #4facfe, #f093fb, #f5576c);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.impact-number.partner {
-  font-size: clamp(72px, 8vw, 120px);
-  font-weight: 700;
-  background: linear-gradient(90deg, #43e97b, #38f9d7, #fddb92);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.impact-label {
-  margin-top: 12px;
-  color: #6e6e73;
-  font-size: 16px;
-}
-
-/* STORY */
-.story {
-  max-width: 720px;
-  margin: 120px auto;
-  padding: 0 24px;
-}
-
-.story h2 {
-  font-size: 32px;
-  margin-top: 64px;
-}
-
-.story p, .story li {
-  font-size: 18px;
-  line-height: 1.8;
-  color: #444;
-}
-
-/* GALLERY */
-.gallery {
-  height: 400vh;
-}
-
-.gallery-item {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain; /* 🔒 ไม่ล้นจอ */
-  background-color: #fff;
-}
-
-/* CONTACT */
-.contact {
-  padding: 120px 24px;
-  text-align: center;
-}
-
-.contact a {
-  font-weight: 600;
-  color: #007aff;
-  text-decoration: none;
-}
-
-/* FOOTER */
-footer {
-  padding: 48px 24px;
-  text-align: center;
-  font-size: 14px;
-  color: #6e6e73;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .decor.palm {
-    width: 260px;
-    left: -100px;
-  }
-
-  .decor.flower {
-    width: 220px;
-    right: -80px;
-  }
-}.hero-sub {
-  margin-top: 24px;
-  font-size: 20px;
-  color: #6e6e73;
-}
-
-/* IMPACT */
-.impact {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.impact-inner {
-  display: flex;
-  gap: 120px;
-  text-align: center;
-}
-
-.impact-number {
-  font-size: clamp(80px, 10vw, 140px);
-  font-weight: 600;
-}
-
-.impact-label {
-  color: #6e6e73;
-}
-
-/* STORY */
-.story {
-  max-width: 720px;
-  margin: 120px auto;
-  padding: 0 24px;
-}
-
-.story h2 {
-  font-size: 32px;
-  margin-top: 64px;
-}
-
-.story p, .story li {
-  font-size: 18px;
-  line-height: 1.8;
-  color: #444;
-}
-
-/* GALLERY */
-.gallery {
-  height: 400vh;
-}
-
-.gallery-item {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-}
-
-/* CONTACT */
-.contact {
-  padding: 120px 24px;
-  text-align: center;
-}
-
-.contact a {
-  font-weight: 600;
-  color: #007aff;
-  text-decoration: none;
-}
-
-/* FOOTER */
-footer {
-  padding: 48px 24px;
-  text-align: center;
-  font-size: 14px;
-  color: #6e6e73;
-}
-
 /* MOBILE */
 @media (max-width: 768px) {
   .impact-inner {
     flex-direction: column;
-    gap: 64px;
-  }
-}
-/* =========================
-   FUN DECOR ELEMENTS
-========================= */
-
-.decor {
-  position: absolute;
-  pointer-events: none;
-  will-change: transform;
-  transition: transform 0.2s linear;
-}
-
-/* 🌴 PALM TREE */
-.decor.palm {
-  width: min(40vw, 360px);
-  bottom: -60px;
-  left: -80px;
-  transform-origin: bottom center;
-  opacity: 0.95;
-  animation: sway 6s ease-in-out infinite;
-}
-
-/* 🌸 FLOWER BUSH */
-.decor.flower {
-  width: min(32vw, 280px);
-  bottom: -40px;
-  right: -60px;
-  transform-origin: bottom center;
-  opacity: 0.95;
-  animation: bounce 5s ease-in-out infinite;
-}
-
-/* playful motion */
-@keyframes sway {
-  0% { transform: rotate(-2deg); }
-  50% { transform: rotate(2deg); }
-  100% { transform: rotate(-2deg); }
-}
-
-@keyframes bounce {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-  100% { transform: translateY(0); }
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .decor.palm {
-    width: 260px;
-    left: -100px;
+    gap: 72px;
   }
 
-  .decor.flower {
-    width: 220px;
-    right: -80px;
+  .story {
+    padding: 96px 0;
   }
 }
