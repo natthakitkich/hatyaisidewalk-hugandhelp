@@ -92,16 +92,26 @@ const cityObserver = new IntersectionObserver(
 cityItems.forEach(item => cityObserver.observe(item));
 
 /* ====================================================
-   ================= PARTNER LOGO (NEW) ================
+   ========== PARTNER LOGO (SUPPORT ALL DRIVE) =========
    ==================================================== */
 
-/* 
-  - ใช้ Google Sheet เดียวกัน
-  - ใช้ url เดียวกัน
-  - อ่านคอลัมน์ F (index 5)
-  - แปลง drive link เป็น img src
-  - ไม่กระทบ fetch เดิม
-*/
+/* ดึง FILE_ID จาก Google Drive ทุกฟอร์แมตที่พบได้จริง */
+function extractDriveFileId(url) {
+  if (!url) return null;
+
+  const patterns = [
+    /id=([^&]+)/,                 // open?id= / uc?id=
+    /\/d\/([^/]+)/,               // file/d/FILE_ID
+    /thumbnail\?id=([^&]+)/       // thumbnail?id=
+  ];
+
+  for (const p of patterns) {
+    const m = url.match(p);
+    if (m && m[1]) return m[1];
+  }
+
+  return null;
+}
 
 fetch(url)
   .then(r => r.text())
@@ -112,12 +122,10 @@ fetch(url)
 
     j.table.rows.forEach(r => {
       const raw = r.c[5]?.v; // Column F
-      if (!raw) return;
+      const fileId = extractDriveFileId(raw);
+      if (!fileId) return;
 
-      const match = raw.match(/id=([^&]+)/);
-      if (!match) return;
-
-      const imgUrl = `https://drive.google.com/uc?export=view&id=${match[1]}`;
+      const imgUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
 
       const circle = document.createElement("div");
       circle.className = "partner-logo-circle";
@@ -125,6 +133,10 @@ fetch(url)
       const img = document.createElement("img");
       img.src = imgUrl;
       img.alt = "partner logo";
+
+      img.onerror = () => {
+        circle.style.display = "none";
+      };
 
       circle.appendChild(img);
       grid.appendChild(circle);
