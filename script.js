@@ -90,3 +90,43 @@ const cityObserver = new IntersectionObserver(
 );
 
 cityItems.forEach(item => cityObserver.observe(item));
+
+/* ====================================================
+   ================= PARTNER LOGO (NEW) ================
+   ==================================================== */
+
+/* 
+  - ใช้ Google Sheet เดียวกัน
+  - ใช้ url เดียวกัน
+  - อ่านคอลัมน์ F (index 5)
+  - แปลง drive link เป็น img src
+  - ไม่กระทบ fetch เดิม
+*/
+
+fetch(url)
+  .then(r => r.text())
+  .then(t => {
+    const j = JSON.parse(t.substring(47).slice(0, -2));
+    const grid = document.getElementById("partnerLogoGrid");
+    if (!grid) return;
+
+    j.table.rows.forEach(r => {
+      const raw = r.c[5]?.v; // Column F
+      if (!raw) return;
+
+      const match = raw.match(/id=([^&]+)/);
+      if (!match) return;
+
+      const imgUrl = `https://drive.google.com/uc?export=view&id=${match[1]}`;
+
+      const circle = document.createElement("div");
+      circle.className = "partner-logo-circle";
+
+      const img = document.createElement("img");
+      img.src = imgUrl;
+      img.alt = "partner logo";
+
+      circle.appendChild(img);
+      grid.appendChild(circle);
+    });
+  });
