@@ -138,3 +138,35 @@ const cityObserver = new IntersectionObserver(
 );
 
 cityItems.forEach(item => cityObserver.observe(item));
+/* APPLE STYLE STAGGER PARTNER LOGOS */
+
+const logoGridObserver = new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+const logos = entry.target.querySelectorAll(".partner-logo-circle");
+
+logos.forEach((logo,i)=>{
+
+logo.style.opacity=0;
+logo.style.transform="translateY(40px) scale(.9)";
+
+setTimeout(()=>{
+
+logo.style.transition="all .8s cubic-bezier(.19,1,.22,1)";
+logo.style.opacity=1;
+logo.style.transform="translateY(0) scale(1)";
+
+}, i*120);
+
+});
+
+}
+
+});
+},{threshold:.3});
+
+const grid=document.querySelector("#partnerLogoGrid");
+
+if(grid) logoGridObserver.observe(grid);
