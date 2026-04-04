@@ -102,8 +102,8 @@ const translations = {
 
     supportTitle: "Where the support is passed on",
     support1: "<strong>Hospitals in Hat Yai</strong> – supporting lives and morale",
-    support2: "<strong>Hatyai Universal Blind School</strong> – creating educational opportunities",
-    support3: "<strong>Ban Maliyim Foundation</strong> – caring for animal lives and the city’s balance",
+    support2: "<strong>The Christian Foundation for the Blind in Thailand @ Songkhla</strong> – creating educational opportunities",
+    support3: "<strong>Smiledog Home Foundation</strong> – caring for animal lives and the city’s balance",
     support4: "<strong>Schools in Hat Yai</strong> – supporting equipment and learning environments",
 
     qrTitle: "Support the city’s revival",
@@ -159,8 +159,8 @@ const translations = {
     supportTitle: "支持将被传递到",
     support1: "<strong>合艾地区医院</strong> – 关怀生命与士气",
     support2: "<strong>合艾国际盲校</strong> – 创造学习机会",
-    support3: "<strong>Ban Maliyim 基金会</strong> – 关怀动物生命与城市生态平衡",
-    support4: "<strong>合艾地区学校</strong> – 支持教学设备与学习环境",
+    support3: "<strong>Smiledog Home Foundation</strong> – 关怀动物生命与城市生态平衡",
+    support4: "<strong>泰国基督教盲人基金会宋卡分部</strong> – 支持教学设备与学习环境",
 
     qrTitle: "一起支持城市复苏",
     qrP1:
