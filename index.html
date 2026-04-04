@@ -13,8 +13,70 @@
 
 <link rel="stylesheet" href="style.css"/>
 
+<style>
+/* ================= LANGUAGE SWITCHER ================= */
+.language-switcher {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 18px);
+  right: 18px;
+  z-index: 9999;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+}
+
+.lang-btn {
+  border: 0;
+  background: transparent;
+  color: #111;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.lang-btn:hover {
+  background: rgba(255,255,255,0.55);
+}
+
+.lang-btn.active {
+  background: #111;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .language-switcher {
+    top: calc(env(safe-area-inset-top, 0px) + 12px);
+    right: 12px;
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .lang-btn {
+    font-size: 11px;
+    padding: 7px 10px;
+  }
+}
+</style>
+
 </head>
 <body>
+
+<!-- LANGUAGE SWITCHER -->
+<div class="language-switcher" aria-label="Language switcher">
+  <button class="lang-btn active" data-lang="th">TH</button>
+  <button class="lang-btn" data-lang="en">EN</button>
+  <button class="lang-btn" data-lang="zh">中文</button>
+</div>
 
 <!-- HERO -->
 
@@ -26,11 +88,11 @@
 <img src="assets/logo.png" class="hero-logo" id="parallaxLogo" alt="Hatyai Sidewalk Logo">
 
 <h1 class="hero-title">
-HATYAI SIDEWALK
-<span>Amazing Smile</span>
+  <span data-i18n="heroTitleLine1">HATYAI SIDEWALK</span>
+  <span data-i18n="heroTitleLine2">Amazing Smile</span>
 </h1>
 
-<p class="hero-sub">
+<p class="hero-sub" data-i18n-html="heroSub">
 เปลี่ยนพลังของงานเทศกาล<br>
 ให้กลายเป็น “รอยยิ้มของเมือง”
 </p>
@@ -40,187 +102,187 @@ HATYAI SIDEWALK
 <!-- IMPACT -->
 
 <section class="section reveal">
-<div class="impact-block">
-<div id="totalAmount" class="impact-number gradient-money">฿0</div>
-<div class="impact-label">ยอดเงินสนับสนุนจากพาร์ตเนอร์</div>
-</div>
+  <div class="impact-block">
+    <div id="totalAmount" class="impact-number gradient-money">฿0</div>
+    <div class="impact-label" data-i18n="impactSupportLabel">ยอดเงินสนับสนุนจากพาร์ตเนอร์</div>
+  </div>
 </section>
 
 <section class="section reveal">
-<div class="impact-block">
-<div id="partnerCount" class="impact-number gradient-partner">0</div>
-<div class="impact-label">จำนวนพาร์ตเนอร์ที่ร่วมฟื้นฟูเมือง</div>
-</div>
+  <div class="impact-block">
+    <div id="partnerCount" class="impact-number gradient-partner">0</div>
+    <div class="impact-label" data-i18n="impactPartnerLabel">จำนวนพาร์ตเนอร์ที่ร่วมฟื้นฟูเมือง</div>
+  </div>
 </section>
 
 <!-- STORY -->
 
 <section class="section story reveal">
-<div class="story-inner">
+  <div class="story-inner">
 
-<h2>การมีชื่อหรือโลโก้ของธุรกิจ
-ปรากฏอยู่ในพื้นที่ของงาน</h2>
+    <h2 data-i18n-html="storyLogoTitle">
+      การมีชื่อหรือโลโก้ของธุรกิจ<br>
+      ปรากฏอยู่ในพื้นที่ของงาน
+    </h2>
 
-<p>
-ไม่ใช่แค่การแสดงตัวตน แต่คือการบอกกับผู้คนว่าธุรกิจนี้ยังอยู่
-</p>
+    <p data-i18n="storyLogoP1">
+      ไม่ใช่แค่การแสดงตัวตน แต่คือการบอกกับผู้คนว่าธุรกิจนี้ยังอยู่
+    </p>
 
-<p>และยังเลือกดูแลเมืองที่ตัวเองใช้ชีวิตอยู่</p>
+    <p data-i18n="storyLogoP2">
+      และยังเลือกดูแลเมืองที่ตัวเองใช้ชีวิตอยู่
+    </p>
 
-</div>
+  </div>
 </section>
 
 <!-- PARTNER LOGOS -->
 
 <section class="section reveal">
-<div class="story-inner">
+  <div class="story-inner">
 
-<h2>พาร์ตเนอร์ที่ร่วมฟื้นฟูเมือง</h2>
+    <h2 data-i18n="partnerSectionTitle">พาร์ตเนอร์ที่ร่วมฟื้นฟูเมือง</h2>
 
-<div id="partnerLogoGrid" class="partner-logo-grid"></div>
+    <div id="partnerLogoGrid" class="partner-logo-grid"></div>
 
-</div>
+  </div>
 </section>
 
 <section class="section story reveal">
-<div class="story-inner">
+  <div class="story-inner">
 
-<h2>
-การเข้าร่วมเป็นพาร์ทเนอร์ของโครงการ
-เป็นการสนับสนุนตามความเหมาะสมของแต่ละธุรกิจ
-ไม่มีการกำหนดจำนวนขั้นต่ำ
-</h2>
+    <h2 data-i18n-html="partnerIntroTitle">
+      การเข้าร่วมเป็นพาร์ทเนอร์ของโครงการ<br>
+      เป็นการสนับสนุนตามความเหมาะสมของแต่ละธุรกิจ<br>
+      ไม่มีการกำหนดจำนวนขั้นต่ำ
+    </h2>
 
-<p>สิ่งที่พาร์ทเนอร์จะได้รับ</p>
+    <p data-i18n="partnerBenefitTitle">สิ่งที่พาร์ทเนอร์จะได้รับ</p>
 
-<ul>
-<p>• การแสดงโลโก้ในพื้นที่งาน</p>
-<p>• การประชาสัมพันธ์ในสื่อของโครงการ</p>
-<p>• การกล่าวขอบคุณและสรุปผลในช่วงปิดงาน</p>
-</ul>
+    <ul>
+      <p data-i18n="partnerBenefit1">• การแสดงโลโก้ในพื้นที่งาน</p>
+      <p data-i18n="partnerBenefit2">• การประชาสัมพันธ์ในสื่อของโครงการ</p>
+      <p data-i18n="partnerBenefit3">• การกล่าวขอบคุณและสรุปผลในช่วงปิดงาน</p>
+    </ul>
 
-</div>
+  </div>
 </section>
 
 <section class="section story reveal">
-<div class="story-inner">
+  <div class="story-inner">
 
-<h2>โครงการนี้เกิดขึ้นเพื่ออะไร</h2>
+    <h2 data-i18n="projectPurposeTitle">โครงการนี้เกิดขึ้นเพื่ออะไร</h2>
 
-<p>
-HATYAI SIDEWALK : AMAZING SMILE
-เกิดขึ้นจากความตั้งใจที่จะสร้างพื้นที่กลางของเมือง
-พื้นที่ที่เชื่อมโยงผู้คน ชุมชน และภาคธุรกิจ
-ให้กลับมาเดินเคียงข้างกันอีกครั้ง
-</p>
+    <p data-i18n="projectPurposeP1">
+      HATYAI SIDEWALK : AMAZING SMILE
+      เกิดขึ้นจากความตั้งใจที่จะสร้างพื้นที่กลางของเมือง
+      พื้นที่ที่เชื่อมโยงผู้คน ชุมชน และภาคธุรกิจ
+      ให้กลับมาเดินเคียงข้างกันอีกครั้ง
+    </p>
 
-<p>
-ผ่านกิจกรรมด้านศิลปะ ดนตรี ไลฟ์สไตล์
-และตลาดสร้างสรรค์บนถนนของเมือง
-เพื่อให้หาดใหญ่กลับมามีชีวิต
-และให้รอยยิ้มของเมืองเกิดขึ้นอีกครั้ง
-</p>
+    <p data-i18n="projectPurposeP2">
+      ผ่านกิจกรรมด้านศิลปะ ดนตรี ไลฟ์สไตล์
+      และตลาดสร้างสรรค์บนถนนของเมือง
+      เพื่อให้หาดใหญ่กลับมามีชีวิต
+      และให้รอยยิ้มของเมืองเกิดขึ้นอีกครั้ง
+    </p>
 
-</div>
+  </div>
 </section>
 
 <section class="section story reveal">
-<div class="story-inner">
+  <div class="story-inner">
 
-<h2>การสนับสนุนที่ถูกส่งต่อ</h2>
+    <h2 data-i18n="supportTitle">การสนับสนุนที่ถูกส่งต่อ</h2>
 
-<ul>
-<li><strong>โรงพยาบาลในพื้นที่หาดใหญ่</strong> – ดูแลชีวิตและกำลังใจ</li>
-<li><strong>โรงเรียนการศึกษาคนตาบอดธรรมสากลหาดใหญ่</strong> – สร้างโอกาสการเรียนรู้</li>
-<li><strong>มูลนิธิบ้านหมายิ้ม</strong> – ดูแลชีวิตสัตว์และสมดุลของเมือง</li>
-<li><strong>โรงเรียนในพื้นที่หาดใหญ่</strong> – สนับสนุนอุปกรณ์และสภาพแวดล้อมการเรียนรู้</li>
-</ul>
+    <ul>
+      <li data-i18n-html="support1"><strong>โรงพยาบาลในพื้นที่หาดใหญ่</strong> – ดูแลชีวิตและกำลังใจ</li>
+      <li data-i18n-html="support2"><strong>โรงเรียนการศึกษาคนตาบอดธรรมสากลหาดใหญ่</strong> – สร้างโอกาสการเรียนรู้</li>
+      <li data-i18n-html="support3"><strong>มูลนิธิบ้านหมายิ้ม</strong> – ดูแลชีวิตสัตว์และสมดุลของเมือง</li>
+      <li data-i18n-html="support4"><strong>โรงเรียนในพื้นที่หาดใหญ่</strong> – สนับสนุนอุปกรณ์และสภาพแวดล้อมการเรียนรู้</li>
+    </ul>
 
-</div>
+  </div>
 </section>
 
 <!-- QR DONATION -->
 
 <section class="section story reveal">
-<div class="story-inner">
+  <div class="story-inner">
 
-<h2>ร่วมสนับสนุนฟื้นฟูเมือง</h2>
+    <h2 data-i18n="qrTitle">ร่วมสนับสนุนฟื้นฟูเมือง</h2>
 
-<img src="assets/qr.jpg" alt="QR Code" style="max-width:220px; margin:20px auto; display:block;">
+    <img src="assets/qr.jpg" alt="QR Code" style="max-width:220px; margin:20px auto; display:block;">
 
-<p>
-สามารถร่วมสนับสนุนโครงการได้ผ่าน QR Code ด้านบน<br>
-เพื่อร่วมเป็นส่วนหนึ่งในการฟื้นฟูและสร้างรอยยิ้มให้กับเมืองหาดใหญ่
-</p>
+    <p data-i18n-html="qrP1">
+      สามารถร่วมสนับสนุนโครงการได้ผ่าน QR Code ด้านบน<br>
+      เพื่อร่วมเป็นส่วนหนึ่งในการฟื้นฟูและสร้างรอยยิ้มให้กับเมืองหาดใหญ่
+    </p>
 
-<p>
-<strong>ไม่กำหนดจำนวนขั้นต่ำในการสนับสนุน</strong><br>
-ทุกการมีส่วนร่วมสามารถเปลี่ยนเป็นพลังที่มีความหมายได้
-</p>
+    <p data-i18n-html="qrP2">
+      <strong>ไม่กำหนดจำนวนขั้นต่ำในการสนับสนุน</strong><br>
+      ทุกการมีส่วนร่วมสามารถเปลี่ยนเป็นพลังที่มีความหมายได้
+    </p>
 
-<p style="margin-top:20px; font-size:14px; opacity:0.8;">
-หมายเหตุ: หากองค์กรหรือธุรกิจใดต้องการให้แสดงโลโก้ในพื้นที่ของโครงการ<br>
-สามารถส่งข้อมูลและรายละเอียดได้ทาง LINE ของโครงการ
-</p>
+    <p style="margin-top:20px; font-size:14px; opacity:0.8;" data-i18n-html="qrNote">
+      หมายเหตุ: หากองค์กรหรือธุรกิจใดต้องการให้แสดงโลโก้ในพื้นที่ของโครงการ<br>
+      สามารถส่งข้อมูลและรายละเอียดได้ทาง LINE ของโครงการ
+    </p>
 
-</div>
+  </div>
 </section>
 
 <!-- CITY -->
 
 <section class="city-sequence">
-<div class="city-item fade"><img src="assets/city-1.jpg" alt=""></div>
-<div class="city-item fade"><img src="assets/city-2.jpg" alt=""></div>
-<div class="city-item fade"><img src="assets/city-3.jpg" alt=""></div>
-<div class="city-item fade"><img src="assets/city-4.jpg" alt=""></div>
+  <div class="city-item fade"><img src="assets/city-1.jpg" alt=""></div>
+  <div class="city-item fade"><img src="assets/city-2.jpg" alt=""></div>
+  <div class="city-item fade"><img src="assets/city-3.jpg" alt=""></div>
+  <div class="city-item fade"><img src="assets/city-4.jpg" alt=""></div>
 </section>
 
 <!-- TEAM -->
 
 <section class="section story reveal">
-<div class="story-inner">
+  <div class="story-inner">
 
-<h2>👥 ผู้รับผิดชอบโครงการ</h2>
+    <h2 data-i18n="teamTitle">👥 ผู้รับผิดชอบโครงการ</h2>
 
-<p><strong>หัวหน้าโครงการ</strong><br>
-นายโชคชัย อินทโชติ</p>
+    <p data-i18n-html="teamLead"><strong>หัวหน้าโครงการ</strong><br>นายโชคชัย อินทโชติ</p>
 
-<p><strong>รองหัวหน้าโครงการ</strong><br>
-นางสาวแทนขวัญ ทัศบุตร</p>
+    <p data-i18n-html="teamDeputy"><strong>รองหัวหน้าโครงการ</strong><br>นางสาวแทนขวัญ ทัศบุตร</p>
 
-<p><strong>ผู้ช่วยหัวหน้าโครงการ</strong><br>
-นายพันธุ์ธัช ด้วงลา</p>
+    <p data-i18n-html="teamAssistant"><strong>ผู้ช่วยหัวหน้าโครงการ</strong><br>นายพันธุ์ธัช ด้วงลา</p>
 
-<p><strong>ผู้ประสานงานโครงการ</strong><br>
-นายณัฏฐกิตติ์ กิชัยรัมย์</p>
+    <p data-i18n-html="teamCoordinator"><strong>ผู้ประสานงานโครงการ</strong><br>นายณัฏฐกิตติ์ กิชัยรัมย์</p>
 
-</div>
+  </div>
 </section>
 
 <!-- CONTACT -->
 
 <section class="section contact reveal contact-highlight">
 
-<h2>📲 ติดต่อโครงการ</h2>
+  <h2 data-i18n="contactTitle">📲 ติดต่อโครงการ</h2>
 
-<p>
-ผู้ประสานงานโครงการ<br>
-คุณณัฏ
-</p>
+  <p data-i18n-html="contactPerson">
+    ผู้ประสานงานโครงการ<br>
+    คุณณัฏ
+  </p>
 
-<p>
-👉 <a href="https://lin.ee/5L1HYyd" target="_blank">LINE</a><br>
-📞 095-514-2539
-</p>
+  <p>
+    👉 <a href="https://lin.ee/5L1HYyd" target="_blank">LINE</a><br>
+    📞 095-514-2539
+  </p>
 
 </section>
 
 <footer>
-<p>
-บริษัท สเมิร์ฟ แอนด์ เฟรนด์ส จำกัด<br>
-162 ซอย 2 วุฒิธานี ตำบลคอหงส์
-อำเภอหาดใหญ่ จังหวัดสงขลา 90110
-</p>
+  <p data-i18n-html="footerAddress">
+    บริษัท สเมิร์ฟ แอนด์ เฟรนด์ส จำกัด<br>
+    162 ซอย 2 วุฒิธานี ตำบลคอหงส์
+    อำเภอหาดใหญ่ จังหวัดสงขลา 90110
+  </p>
 </footer>
 
 <script src="script.js"></script>
